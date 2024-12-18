@@ -65,9 +65,57 @@ void Menu::force(std::ofstream& fout)
 
 void Menu::clean()
 {
-	Print::script(fout, decl::terminal_rmrf +  decl::path_plot);
+	Print::script(fout, decl::terminal_rmrf +  decl::path_build_folder);
 
 }
 
 
+void Menu::eidt(std::ofstream& fout, std::vector<std::string>& files_vec)
+{
+	std::stringstream stringstream;
+	for(const std::string& file_str: file_vec)
+	{
+		std::string title = split(file_str).first;
+		if(title == "exe")
+		{
+			stringstream << file_str << ".cpp ";
+		}
+		else if(title == "head")
+		{
+			stringstream << file_str << ".h ";
+		}
+		else
+		{
+			stringstream << file_str << ".cpp ";
+			stringstream << file_str << ".h ";
+		}
+	}
 
+	Print::script(fout, decl::terminal_geany_open + stringstream.str());
+}
+
+
+
+void Menu::exe(std::ofstream& fout, std::vector<std::string>& files_vec)
+{
+	std::vector<std::string> exe_vec;
+	std::vector<std::string> without_exe_vec;
+
+	for(const std::string& file_str: file_vec)
+	{
+		std::string title = split(file_str).first;
+		if(title == "exe")
+		{
+			exe_vec.push_back(split(file_str).second);
+		}
+		else
+		{
+			without_exe_vec.push_back(split(file_str).second);
+		}
+	}
+
+	for(std::string exe_title: exe_vec)
+	{
+		Print::cmd(fout, decl::path_run_folder + exe_tile,
+	Print::script(fout, decl::terminal_geany_open + stringstream.str());
+}

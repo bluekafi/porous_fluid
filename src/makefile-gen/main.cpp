@@ -44,7 +44,7 @@ int main()
 	 * build/obj1.o: obj1.cpp obj1.h headers.h
 	 * 		g++ -c Wall -o obj1.o
 	 */
-	objects(fout, files_vec);
+	Menu::objects(fout, files_vec);
 
 	return 0;
 }
