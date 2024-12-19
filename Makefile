@@ -4,16 +4,31 @@ all: necessary_compile
 	@echo "Command executed = all"
 
 
-necessary_compile: run/incongen run/plot run/simulate run/test
-	rm -rf run/output_files/plots
-	mkdir run/output_files/plots
+necessary_compile: folder_check run/incongen run/plot run/simulate run/test
 	@echo "Command executed = necessary_compile"
+
+
+folder_check:
+	rm -rf result-old
+	mkdir -p build
+	mkdir -p docs
+	mkdir -p result
+	mkdir -p run
+	mv result result-old
+	mkdir -p result
+	mkdir -p result/calculation
+	mkdir -p result/graph
+	mkdir -p result/noradius
+	mkdir -p result/pressure
+	mkdir -p result/thick
+	mkdir -p result/velocity
+	@echo "Command executed = folder_check"
 
 
 force: clean necessary_compile
 	@echo "Command executed = force"
 	rm -rf build/
-	mkdir build/
+	mkdir -p build/
 
 
 edit:

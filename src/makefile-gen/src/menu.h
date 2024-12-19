@@ -41,6 +41,7 @@ public:
 	static std::vector<std::string> read_file_structure();
 	static void all(std::ofstream& fout);
 	static void necessary_compile(std::ofstream& fout, const std::vector<std::string>& file_vec);
+	static void folder_check(std::ofstream& fout);
 	static void force(std::ofstream& fout);
 	static void clean(std::ofstream& fout);
 	static void edit(std::ofstream& fout, const std::vector<std::string>& file_vec);

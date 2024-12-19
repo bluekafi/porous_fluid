@@ -27,6 +27,8 @@ int main()
 	 */
 	Menu::necessary_compile(fout, file_vec);
 
+	Menu::folder_check(fout);
+
 	/*
 	 * force: clean_build, necessary_compile
 	 */

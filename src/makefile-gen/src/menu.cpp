@@ -92,12 +92,40 @@ void Menu::all(std::ofstream& fout)
 }
 
 
+void Menu::folder_check(std::ofstream& fout)
+{
+	Print::makefile_command_title(fout, "folder_check");
+
+	Print::script(fout, decl::terminal_rmrf + "result-old");
+
+	for(const std::string& folder: decl::folder_exist_check)
+	{
+		//Print::script(fout, "@test -d " + folder + " || " + decl::terminal_mkdir + folder);
+		Print::script(fout, decl::terminal_mkdir + folder);
+	}
+
+	Print::script(fout, "mv result result-old");
+
+	for(const std::string& folder: decl::folder_result)
+	{
+		Print::script(fout, decl::terminal_mkdir + folder);
+	}
+
+
+	Print::echo(fout, "Command executed = folder_check");
+}
+
+
 void Menu::necessary_compile(std::ofstream& fout, const std::vector<std::string>& file_vec)
 {
-	Print::makefile_command_title(fout, "necessary_compile", Menu::convert_vec(list_exe(file_vec), &Menu::convert_to_exe));
+	std::vector<std::string> deps(
+		Menu::convert_vec(
+			list_exe(file_vec),
+			Menu::convert_to_exe));
 
-	Print::script(fout, decl::terminal_rmrf +  decl::path_plot);
-	Print::script(fout, decl::terminal_mkdir + decl::path_plot);
+	deps.insert(deps.begin(), "folder_check");
+
+	Print::makefile_command_title(fout, "necessary_compile", deps);
 
 	Print::echo(fout, "Command executed = necessary_compile");
 }
