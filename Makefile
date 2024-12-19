@@ -1,198 +1,150 @@
 
 
 all: necessary_compile
-	@echo " "
-	@echo "Command executed = all/default make"
+	@echo "Command executed = all"
 
 
-necessary_compile: run/initcongen run/simulate run/plot run/color run/test
-	@echo " "
-	@echo "Command executed = necessary_compile"
+necessary_compile: run/incongen run/plot run/simulate run/test
 	rm -rf run/output_files/plots
 	mkdir run/output_files/plots
+	@echo "Command executed = necessary_compile"
 
 
 force: clean necessary_compile
-	@echo " "
 	@echo "Command executed = force"
-
-
-clean:
-	@echo " "
-	rm -rf app-simulation/build/
-	mkdir app-simulation/build/
-	@echo "Command executed = clean"
+	rm -rf build/
+	mkdir build/
 
 
 edit:
-	@echo " "
-	geany -i  app-simulation/src/cmdioprint.h app-simulation/src/cmdioprint.cpp app-simulation/src/cmdioread.h app-simulation/src/cmdioread.cpp app-simulation/src/declconst.h app-simulation/src/declfilename.h app-simulation/src/decltypedef.h app-simulation/src/drw.h app-simulation/src/drw.cpp app-simulation/src/dstdiamension.h app-simulation/src/dstdiamension.cpp app-simulation/src/dstmns.h app-simulation/src/dstmns.cpp app-simulation/src/fileioplot.h app-simulation/src/fileioplot.cpp app-simulation/src/fileioread.h app-simulation/src/fileioread.cpp app-simulation/src/fileiowrite.h app-simulation/src/fileiowrite.cpp app-simulation/src/funcglobal.h app-simulation/src/funcglobal.cpp app-simulation/src/funcpressure.h app-simulation/src/funcpressure.cpp app-simulation/src/funcvelocity.h app-simulation/src/funcvelocity.cpp app-simulation/src/functimestep.h app-simulation/src/functimestep.cpp app-simulation/src/funcdetermine.h app-simulation/src/funcdetermine.cpp app-simulation/src/funcintegration.h app-simulation/src/funcintegration.cpp app-simulation/src/funcmeasure.h app-simulation/src/funcmeasure.cpp app-simulation/src/mathlinear.h app-simulation/src/mathlinear.cpp app-simulation/src/initconmode.h app-simulation/src/initconmode.cpp app-simulation/src/proginitcongen.cpp app-simulation/src/progsimulate.cpp app-simulation/src/progplot.cpp app-simulation/src/progcolor.cpp app-simulation/src/progtest.cpp app-simulation/src/utilityrandom.h app-simulation/src/utilityrandom.cpp
-	@echo "Command executed = open all files to be edited on Geany"
+	geany -i  src/dst/meniscus.h src/dst/meniscus.cpp src/exe/incongen.cpp src/exe/plot.cpp src/exe/simulate.cpp src/exe/test.cpp src/graphics/drawbmp.h src/graphics/drawbmp.cpp src/head/decltypedef.h src/incongen/incongen.h src/incongen/incongen.cpp src/input-output/cmdioprint.h src/input-output/cmdioprint.cpp src/input-output/cmdioread.h src/input-output/cmdioread.cpp src/input-output/fileioplot.h src/input-output/fileioplot.cpp src/input-output/fileioread.h src/input-output/fileioread.cpp src/input-output/fileiowrite.h src/input-output/fileiowrite.cpp src/math/gausslinear.h src/math/gausslinear.cpp src/math/random.h src/math/random.cpp src/measurement/measure.h src/measurement/measure.cpp src/network-structure/dimension.h src/network-structure/dimension.cpp src/simulation-algorithms/determine.h src/simulation-algorithms/determine.cpp src/simulation-steps/00-simulate-manager.h src/simulation-steps/00-simulate-manager.cpp src/simulation-steps/01-pressure.h src/simulation-steps/01-pressure.cpp src/simulation-steps/02-velocity.h src/simulation-steps/02-velocity.cpp src/simulation-steps/03-timestep.h src/simulation-steps/03-timestep.cpp src/simulation-steps/04-displacement.h src/simulation-steps/04-displacement.cpp
 
 
-run/initcongen: app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/proginitcongen.o
-	@echo " "
-	@echo "Executing command = link-compile of file [run/initcongen]"
-	g++ app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/proginitcongen.o -o run/initcongen
+run/incongen: build/exe_incongen.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
+	g++  build/exe_incongen.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/incongen
+	@echo "build/exe_incongen.o created."
 
 
-run/simulate: app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progsimulate.o
-	@echo " "
-	@echo "Executing command = link-compile of file [run/simulate]"
-	g++ app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progsimulate.o -o run/simulate
+run/plot: build/exe_plot.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
+	g++  build/exe_plot.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/plot
+	@echo "build/exe_plot.o created."
 
 
-run/plot: app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progplot.o
-	@echo " "
-	@echo "Executing command = link-compile of file [run/plot]"
-	g++ app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progplot.o -o run/plot
+run/simulate: build/exe_simulate.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
+	g++  build/exe_simulate.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/simulate
+	@echo "build/exe_simulate.o created."
 
 
-run/color: app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progcolor.o
-	@echo " "
-	@echo "Executing command = link-compile of file [run/color]"
-	g++ app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progcolor.o -o run/color
+run/test: build/exe_test.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
+	g++  build/exe_test.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/test
+	@echo "build/exe_test.o created."
 
 
-run/test: app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progtest.o
-	@echo " "
-	@echo "Executing command = link-compile of file [run/test]"
-	g++ app-simulation/build/cmdioprint.o app-simulation/build/cmdioread.o app-simulation/build/drw.o app-simulation/build/dstdiamension.o app-simulation/build/dstmns.o app-simulation/build/fileioplot.o app-simulation/build/fileioread.o app-simulation/build/fileiowrite.o app-simulation/build/funcglobal.o app-simulation/build/funcpressure.o app-simulation/build/funcvelocity.o app-simulation/build/functimestep.o app-simulation/build/funcdetermine.o app-simulation/build/funcintegration.o app-simulation/build/funcmeasure.o app-simulation/build/mathlinear.o app-simulation/build/initconmode.o app-simulation/build/utilityrandom.o app-simulation/build/progtest.o -o run/test
+build/dst_meniscus.o: src/dst/meniscus.h src/dst/meniscus.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/dst/meniscus.cpp -o build/dst_meniscus.o
+	@echo "build/dst_meniscus.o created."
 
 
-app-simulation/build/cmdioprint.o: app-simulation/src/cmdioprint.h app-simulation/src/cmdioprint.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/cmdioprint.o] from [app-simulation/src/cmdioprint.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/cmdioprint.cpp -o app-simulation/build/cmdioprint.o
+build/exe_incongen.o: src/exe/incongen.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/exe/incongen.cpp -o build/exe_incongen.o
+	@echo "build/exe_incongen.o created."
 
 
-app-simulation/build/cmdioread.o: app-simulation/src/cmdioread.h app-simulation/src/cmdioread.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/cmdioread.o] from [app-simulation/src/cmdioread.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/cmdioread.cpp -o app-simulation/build/cmdioread.o
+build/exe_plot.o: src/exe/plot.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/exe/plot.cpp -o build/exe_plot.o
+	@echo "build/exe_plot.o created."
 
 
-app-simulation/build/drw.o: app-simulation/src/drw.h app-simulation/src/drw.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/drw.o] from [app-simulation/src/drw.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/drw.cpp -o app-simulation/build/drw.o
+build/exe_simulate.o: src/exe/simulate.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/exe/simulate.cpp -o build/exe_simulate.o
+	@echo "build/exe_simulate.o created."
 
 
-app-simulation/build/dstdiamension.o: app-simulation/src/dstdiamension.h app-simulation/src/dstdiamension.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/dstdiamension.o] from [app-simulation/src/dstdiamension.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/dstdiamension.cpp -o app-simulation/build/dstdiamension.o
+build/exe_test.o: src/exe/test.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/exe/test.cpp -o build/exe_test.o
+	@echo "build/exe_test.o created."
 
 
-app-simulation/build/dstmns.o: app-simulation/src/dstmns.h app-simulation/src/dstmns.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/dstmns.o] from [app-simulation/src/dstmns.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/dstmns.cpp -o app-simulation/build/dstmns.o
+build/graphics_drawbmp.o: src/graphics/drawbmp.h src/graphics/drawbmp.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/graphics/drawbmp.cpp -o build/graphics_drawbmp.o
+	@echo "build/graphics_drawbmp.o created."
 
 
-app-simulation/build/fileioplot.o: app-simulation/src/fileioplot.h app-simulation/src/fileioplot.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/fileioplot.o] from [app-simulation/src/fileioplot.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/fileioplot.cpp -o app-simulation/build/fileioplot.o
+build/incongen_incongen.o: src/incongen/incongen.h src/incongen/incongen.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/incongen/incongen.cpp -o build/incongen_incongen.o
+	@echo "build/incongen_incongen.o created."
 
 
-app-simulation/build/fileioread.o: app-simulation/src/fileioread.h app-simulation/src/fileioread.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/fileioread.o] from [app-simulation/src/fileioread.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/fileioread.cpp -o app-simulation/build/fileioread.o
+build/input-output_cmdioprint.o: src/input-output/cmdioprint.h src/input-output/cmdioprint.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/cmdioprint.cpp -o build/input-output_cmdioprint.o
+	@echo "build/input-output_cmdioprint.o created."
 
 
-app-simulation/build/fileiowrite.o: app-simulation/src/fileiowrite.h app-simulation/src/fileiowrite.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/fileiowrite.o] from [app-simulation/src/fileiowrite.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/fileiowrite.cpp -o app-simulation/build/fileiowrite.o
+build/input-output_cmdioread.o: src/input-output/cmdioread.h src/input-output/cmdioread.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/cmdioread.cpp -o build/input-output_cmdioread.o
+	@echo "build/input-output_cmdioread.o created."
 
 
-app-simulation/build/funcglobal.o: app-simulation/src/funcglobal.h app-simulation/src/funcglobal.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcglobal.o] from [app-simulation/src/funcglobal.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcglobal.cpp -o app-simulation/build/funcglobal.o
+build/input-output_fileioplot.o: src/input-output/fileioplot.h src/input-output/fileioplot.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileioplot.cpp -o build/input-output_fileioplot.o
+	@echo "build/input-output_fileioplot.o created."
 
 
-app-simulation/build/funcpressure.o: app-simulation/src/funcpressure.h app-simulation/src/funcpressure.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcpressure.o] from [app-simulation/src/funcpressure.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcpressure.cpp -o app-simulation/build/funcpressure.o
+build/input-output_fileioread.o: src/input-output/fileioread.h src/input-output/fileioread.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileioread.cpp -o build/input-output_fileioread.o
+	@echo "build/input-output_fileioread.o created."
 
 
-app-simulation/build/funcvelocity.o: app-simulation/src/funcvelocity.h app-simulation/src/funcvelocity.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcvelocity.o] from [app-simulation/src/funcvelocity.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcvelocity.cpp -o app-simulation/build/funcvelocity.o
+build/input-output_fileiowrite.o: src/input-output/fileiowrite.h src/input-output/fileiowrite.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileiowrite.cpp -o build/input-output_fileiowrite.o
+	@echo "build/input-output_fileiowrite.o created."
 
 
-app-simulation/build/functimestep.o: app-simulation/src/functimestep.h app-simulation/src/functimestep.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/functimestep.o] from [app-simulation/src/functimestep.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/functimestep.cpp -o app-simulation/build/functimestep.o
+build/math_gausslinear.o: src/math/gausslinear.h src/math/gausslinear.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/math/gausslinear.cpp -o build/math_gausslinear.o
+	@echo "build/math_gausslinear.o created."
 
 
-app-simulation/build/funcdetermine.o: app-simulation/src/funcdetermine.h app-simulation/src/funcdetermine.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcdetermine.o] from [app-simulation/src/funcdetermine.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcdetermine.cpp -o app-simulation/build/funcdetermine.o
+build/math_random.o: src/math/random.h src/math/random.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/math/random.cpp -o build/math_random.o
+	@echo "build/math_random.o created."
 
 
-app-simulation/build/funcintegration.o: app-simulation/src/funcintegration.h app-simulation/src/funcintegration.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcintegration.o] from [app-simulation/src/funcintegration.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcintegration.cpp -o app-simulation/build/funcintegration.o
+build/measurement_measure.o: src/measurement/measure.h src/measurement/measure.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/measurement/measure.cpp -o build/measurement_measure.o
+	@echo "build/measurement_measure.o created."
 
 
-app-simulation/build/funcmeasure.o: app-simulation/src/funcmeasure.h app-simulation/src/funcmeasure.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/funcmeasure.o] from [app-simulation/src/funcmeasure.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/funcmeasure.cpp -o app-simulation/build/funcmeasure.o
+build/network-structure_dimension.o: src/network-structure/dimension.h src/network-structure/dimension.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/network-structure/dimension.cpp -o build/network-structure_dimension.o
+	@echo "build/network-structure_dimension.o created."
 
 
-app-simulation/build/mathlinear.o: app-simulation/src/mathlinear.h app-simulation/src/mathlinear.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/mathlinear.o] from [app-simulation/src/mathlinear.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/mathlinear.cpp -o app-simulation/build/mathlinear.o
+build/simulation-algorithms_determine.o: src/simulation-algorithms/determine.h src/simulation-algorithms/determine.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-algorithms/determine.cpp -o build/simulation-algorithms_determine.o
+	@echo "build/simulation-algorithms_determine.o created."
 
 
-app-simulation/build/initconmode.o: app-simulation/src/initconmode.h app-simulation/src/initconmode.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/initconmode.o] from [app-simulation/src/initconmode.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/initconmode.cpp -o app-simulation/build/initconmode.o
+build/simulation-steps_00-simulate-manager.o: src/simulation-steps/00-simulate-manager.h src/simulation-steps/00-simulate-manager.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/00-simulate-manager.cpp -o build/simulation-steps_00-simulate-manager.o
+	@echo "build/simulation-steps_00-simulate-manager.o created."
 
 
-app-simulation/build/proginitcongen.o: app-simulation/src/proginitcongen.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/proginitcongen.o] from [app-simulation/src/proginitcongen.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/proginitcongen.cpp -o app-simulation/build/proginitcongen.o
+build/simulation-steps_01-pressure.o: src/simulation-steps/01-pressure.h src/simulation-steps/01-pressure.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/01-pressure.cpp -o build/simulation-steps_01-pressure.o
+	@echo "build/simulation-steps_01-pressure.o created."
 
 
-app-simulation/build/progsimulate.o: app-simulation/src/progsimulate.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/progsimulate.o] from [app-simulation/src/progsimulate.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/progsimulate.cpp -o app-simulation/build/progsimulate.o
+build/simulation-steps_02-velocity.o: src/simulation-steps/02-velocity.h src/simulation-steps/02-velocity.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/02-velocity.cpp -o build/simulation-steps_02-velocity.o
+	@echo "build/simulation-steps_02-velocity.o created."
 
 
-app-simulation/build/progplot.o: app-simulation/src/progplot.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/progplot.o] from [app-simulation/src/progplot.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/progplot.cpp -o app-simulation/build/progplot.o
+build/simulation-steps_03-timestep.o: src/simulation-steps/03-timestep.h src/simulation-steps/03-timestep.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/03-timestep.cpp -o build/simulation-steps_03-timestep.o
+	@echo "build/simulation-steps_03-timestep.o created."
 
 
-app-simulation/build/progcolor.o: app-simulation/src/progcolor.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/progcolor.o] from [app-simulation/src/progcolor.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/progcolor.cpp -o app-simulation/build/progcolor.o
-
-
-app-simulation/build/progtest.o: app-simulation/src/progtest.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/progtest.o] from [app-simulation/src/progtest.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/progtest.cpp -o app-simulation/build/progtest.o
-
-
-app-simulation/build/utilityrandom.o: app-simulation/src/utilityrandom.h app-simulation/src/utilityrandom.cpp app-simulation/src/declconst.h
-	@echo " "
-	@echo "Executing command = compiling to make [app-simulation/build/utilityrandom.o] from [app-simulation/src/utilityrandom.cpp]"
-	g++ -c -Wall -std=c++17 -Iapp-simulation/src/ app-simulation/src/utilityrandom.cpp -o app-simulation/build/utilityrandom.o
+build/simulation-steps_04-displacement.o: src/simulation-steps/04-displacement.h src/simulation-steps/04-displacement.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/04-displacement.cpp -o build/simulation-steps_04-displacement.o
+	@echo "build/simulation-steps_04-displacement.o created."

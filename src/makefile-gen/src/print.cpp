@@ -1,17 +1,22 @@
 #include "print.h"
 
-void Print::echo(std::ofstream& fout, const std::string& s)
+void Print::echo(
+	std::ofstream& fout,
+	const std::string& echo_message_str)
 {
-	fout << '\t' << "@echo " << '\"' << s << '\"' << '\n';
+	fout << '\t' << "@echo " << '\"' << echo_message_str << '\"' << '\n';
 }
 
-void Print::cmd(std::ofstream& fout, const std::string& s, const std::vector<std::string>& v)
+void Print::makefile_command_title(
+	std::ofstream& fout,
+	const std::string& command_name_str,
+	const std::vector<std::string>& dependencies_vec)
 {
 	fout << "\n\n";
-	fout << s << ':';
-	for(const std::string& x: v)
+	fout << command_name_str << ':';
+	for(const std::string& dependency_str: dependencies_vec)
 	{
-		fout << x << ' ';
+		fout << ' ' << dependency_str;
 	}
 	fout << '\n';
 }

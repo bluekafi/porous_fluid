@@ -8,8 +8,14 @@
 class Print
 {
 public:
-	static void echo(std::ofstream& fout, const std::string& echo_comment);
-	static void cmd(std::ofstream& fout, const std::string& makefile_cmd_title, const std::vector<std::string>& makefile_cmd_dependencies);
+	static void echo(std::ofstream& fout,
+		const std::string& echo_message_str);
+
+	static void makefile_command_title(
+		std::ofstream& fout,
+		const std::string& command_name_str,
+		const std::vector<std::string>& dependencies_vec = {});
+
 	static void script(std::ofstream& fout, const std::string& str_script);
 };
 
