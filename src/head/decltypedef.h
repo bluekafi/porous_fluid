@@ -1,6 +1,6 @@
 #ifndef DECLTYPEDEF_H
 #define DECLTYPEDEF_H
-#include "dstmns.h"
+#include "dst/meniscus.h"
 
 typedef std::vector<std::vector<double>> Tdouble; //Table of double numbers
 typedef std::vector<std::vector<dst::Mns>> TMns;
@@ -13,7 +13,7 @@ namespace declfilename
 	{
 		const std::string NAME_FOLDER_INPUT = "input_files/";
 		const std::string NAME_FOLDER_OUTPUT = "output_files/";
-		
+
 		const std::string NAME_FILE_RADIUS = "radius.txt";
 		const std::string NAME_FILE_MNSC = "mnsc.txt";
 		const std::string NAME_FILE_FLUID_PPR = "fluid_ppr.txt";

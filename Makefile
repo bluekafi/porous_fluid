@@ -32,27 +32,37 @@ force: clean necessary_compile
 
 
 edit:
-	geany -i  src/dst/meniscus.h src/dst/meniscus.cpp src/exe/incongen.cpp src/exe/plot.cpp src/exe/simulate.cpp src/exe/test.cpp src/graphics/drawbmp.h src/graphics/drawbmp.cpp src/head/decltypedef.h src/incongen/incongen.h src/incongen/incongen.cpp src/input-output/cmdioprint.h src/input-output/cmdioprint.cpp src/input-output/cmdioread.h src/input-output/cmdioread.cpp src/input-output/fileioplot.h src/input-output/fileioplot.cpp src/input-output/fileioread.h src/input-output/fileioread.cpp src/input-output/fileiowrite.h src/input-output/fileiowrite.cpp src/math/gausslinear.h src/math/gausslinear.cpp src/math/random.h src/math/random.cpp src/measurement/measure.h src/measurement/measure.cpp src/network-structure/dimension.h src/network-structure/dimension.cpp src/simulation-algorithms/determine.h src/simulation-algorithms/determine.cpp src/simulation-steps/00-simulate-manager.h src/simulation-steps/00-simulate-manager.cpp src/simulation-steps/01-pressure.h src/simulation-steps/01-pressure.cpp src/simulation-steps/02-velocity.h src/simulation-steps/02-velocity.cpp src/simulation-steps/03-timestep.h src/simulation-steps/03-timestep.cpp src/simulation-steps/04-displacement.h src/simulation-steps/04-displacement.cpp
+	geany -i  src/algo/determine.h src/algo/determine.cpp src/drw/bmp.h src/drw/bmp.cpp src/dst/meniscus.h src/dst/meniscus.cpp src/exe/incongen.cpp src/exe/plot.cpp src/exe/simulate.cpp src/exe/test.cpp src/head/decltypedef.h src/incongen/manager.h src/incongen/manager.cpp src/io/cmdprint.h src/io/cmdprint.cpp src/io/cmdread.h src/io/cmdread.cpp src/io/fileplot.h src/io/fileplot.cpp src/io/fileread.h src/io/fileread.cpp src/io/filewrite.h src/io/filewrite.cpp src/math/gausslinear.h src/math/gausslinear.cpp src/math/random.h src/math/random.cpp src/measure/measure.h src/measure/measure.cpp src/network/dimension.h src/network/dimension.cpp src/smlsteps/01pressure.h src/smlsteps/01pressure.cpp src/smlsteps/02velocity.h src/smlsteps/02velocity.cpp src/smlsteps/03timestep.h src/smlsteps/03timestep.cpp src/smlsteps/04displacement.h src/smlsteps/04displacement.cpp src/smlsteps/manager.h src/smlsteps/manager.cpp
 
 
-run/incongen: build/exe_incongen.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
-	g++  build/exe_incongen.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/incongen
+run/incongen: build/exe_incongen.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o
+	g++  build/exe_incongen.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o -o run/incongen
 	@echo "build/exe_incongen.o created."
 
 
-run/plot: build/exe_plot.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
-	g++  build/exe_plot.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/plot
+run/plot: build/exe_plot.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o
+	g++  build/exe_plot.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o -o run/plot
 	@echo "build/exe_plot.o created."
 
 
-run/simulate: build/exe_simulate.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
-	g++  build/exe_simulate.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/simulate
+run/simulate: build/exe_simulate.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o
+	g++  build/exe_simulate.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o -o run/simulate
 	@echo "build/exe_simulate.o created."
 
 
-run/test: build/exe_test.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o
-	g++  build/exe_test.o build/dst_meniscus.o build/graphics_drawbmp.o build/incongen_incongen.o build/input-output_cmdioprint.o build/input-output_cmdioread.o build/input-output_fileioplot.o build/input-output_fileioread.o build/input-output_fileiowrite.o build/math_gausslinear.o build/math_random.o build/measurement_measure.o build/network-structure_dimension.o build/simulation-algorithms_determine.o build/simulation-steps_00-simulate-manager.o build/simulation-steps_01-pressure.o build/simulation-steps_02-velocity.o build/simulation-steps_03-timestep.o build/simulation-steps_04-displacement.o -o run/test
+run/test: build/exe_test.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o
+	g++  build/exe_test.o build/algo_determine.o build/drw_bmp.o build/dst_meniscus.o build/incongen_manager.o build/io_cmdprint.o build/io_cmdread.o build/io_fileplot.o build/io_fileread.o build/io_filewrite.o build/math_gausslinear.o build/math_random.o build/measure_measure.o build/network_dimension.o build/smlsteps_01pressure.o build/smlsteps_02velocity.o build/smlsteps_03timestep.o build/smlsteps_04displacement.o build/smlsteps_manager.o -o run/test
 	@echo "build/exe_test.o created."
+
+
+build/algo_determine.o: src/algo/determine.h src/algo/determine.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/algo/determine.cpp -o build/algo_determine.o
+	@echo "build/algo_determine.o created."
+
+
+build/drw_bmp.o: src/drw/bmp.h src/drw/bmp.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/drw/bmp.cpp -o build/drw_bmp.o
+	@echo "build/drw_bmp.o created."
 
 
 build/dst_meniscus.o: src/dst/meniscus.h src/dst/meniscus.cpp src/head/decltypedef.h
@@ -80,39 +90,34 @@ build/exe_test.o: src/exe/test.cpp src/head/decltypedef.h
 	@echo "build/exe_test.o created."
 
 
-build/graphics_drawbmp.o: src/graphics/drawbmp.h src/graphics/drawbmp.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/graphics/drawbmp.cpp -o build/graphics_drawbmp.o
-	@echo "build/graphics_drawbmp.o created."
+build/incongen_manager.o: src/incongen/manager.h src/incongen/manager.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/incongen/manager.cpp -o build/incongen_manager.o
+	@echo "build/incongen_manager.o created."
 
 
-build/incongen_incongen.o: src/incongen/incongen.h src/incongen/incongen.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/incongen/incongen.cpp -o build/incongen_incongen.o
-	@echo "build/incongen_incongen.o created."
+build/io_cmdprint.o: src/io/cmdprint.h src/io/cmdprint.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/io/cmdprint.cpp -o build/io_cmdprint.o
+	@echo "build/io_cmdprint.o created."
 
 
-build/input-output_cmdioprint.o: src/input-output/cmdioprint.h src/input-output/cmdioprint.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/cmdioprint.cpp -o build/input-output_cmdioprint.o
-	@echo "build/input-output_cmdioprint.o created."
+build/io_cmdread.o: src/io/cmdread.h src/io/cmdread.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/io/cmdread.cpp -o build/io_cmdread.o
+	@echo "build/io_cmdread.o created."
 
 
-build/input-output_cmdioread.o: src/input-output/cmdioread.h src/input-output/cmdioread.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/cmdioread.cpp -o build/input-output_cmdioread.o
-	@echo "build/input-output_cmdioread.o created."
+build/io_fileplot.o: src/io/fileplot.h src/io/fileplot.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/io/fileplot.cpp -o build/io_fileplot.o
+	@echo "build/io_fileplot.o created."
 
 
-build/input-output_fileioplot.o: src/input-output/fileioplot.h src/input-output/fileioplot.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileioplot.cpp -o build/input-output_fileioplot.o
-	@echo "build/input-output_fileioplot.o created."
+build/io_fileread.o: src/io/fileread.h src/io/fileread.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/io/fileread.cpp -o build/io_fileread.o
+	@echo "build/io_fileread.o created."
 
 
-build/input-output_fileioread.o: src/input-output/fileioread.h src/input-output/fileioread.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileioread.cpp -o build/input-output_fileioread.o
-	@echo "build/input-output_fileioread.o created."
-
-
-build/input-output_fileiowrite.o: src/input-output/fileiowrite.h src/input-output/fileiowrite.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/input-output/fileiowrite.cpp -o build/input-output_fileiowrite.o
-	@echo "build/input-output_fileiowrite.o created."
+build/io_filewrite.o: src/io/filewrite.h src/io/filewrite.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/io/filewrite.cpp -o build/io_filewrite.o
+	@echo "build/io_filewrite.o created."
 
 
 build/math_gausslinear.o: src/math/gausslinear.h src/math/gausslinear.cpp src/head/decltypedef.h
@@ -125,41 +130,36 @@ build/math_random.o: src/math/random.h src/math/random.cpp src/head/decltypedef.
 	@echo "build/math_random.o created."
 
 
-build/measurement_measure.o: src/measurement/measure.h src/measurement/measure.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/measurement/measure.cpp -o build/measurement_measure.o
-	@echo "build/measurement_measure.o created."
+build/measure_measure.o: src/measure/measure.h src/measure/measure.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/measure/measure.cpp -o build/measure_measure.o
+	@echo "build/measure_measure.o created."
 
 
-build/network-structure_dimension.o: src/network-structure/dimension.h src/network-structure/dimension.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/network-structure/dimension.cpp -o build/network-structure_dimension.o
-	@echo "build/network-structure_dimension.o created."
+build/network_dimension.o: src/network/dimension.h src/network/dimension.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/network/dimension.cpp -o build/network_dimension.o
+	@echo "build/network_dimension.o created."
 
 
-build/simulation-algorithms_determine.o: src/simulation-algorithms/determine.h src/simulation-algorithms/determine.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-algorithms/determine.cpp -o build/simulation-algorithms_determine.o
-	@echo "build/simulation-algorithms_determine.o created."
+build/smlsteps_01pressure.o: src/smlsteps/01pressure.h src/smlsteps/01pressure.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/smlsteps/01pressure.cpp -o build/smlsteps_01pressure.o
+	@echo "build/smlsteps_01pressure.o created."
 
 
-build/simulation-steps_00-simulate-manager.o: src/simulation-steps/00-simulate-manager.h src/simulation-steps/00-simulate-manager.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/00-simulate-manager.cpp -o build/simulation-steps_00-simulate-manager.o
-	@echo "build/simulation-steps_00-simulate-manager.o created."
+build/smlsteps_02velocity.o: src/smlsteps/02velocity.h src/smlsteps/02velocity.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/smlsteps/02velocity.cpp -o build/smlsteps_02velocity.o
+	@echo "build/smlsteps_02velocity.o created."
 
 
-build/simulation-steps_01-pressure.o: src/simulation-steps/01-pressure.h src/simulation-steps/01-pressure.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/01-pressure.cpp -o build/simulation-steps_01-pressure.o
-	@echo "build/simulation-steps_01-pressure.o created."
+build/smlsteps_03timestep.o: src/smlsteps/03timestep.h src/smlsteps/03timestep.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/smlsteps/03timestep.cpp -o build/smlsteps_03timestep.o
+	@echo "build/smlsteps_03timestep.o created."
 
 
-build/simulation-steps_02-velocity.o: src/simulation-steps/02-velocity.h src/simulation-steps/02-velocity.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/02-velocity.cpp -o build/simulation-steps_02-velocity.o
-	@echo "build/simulation-steps_02-velocity.o created."
+build/smlsteps_04displacement.o: src/smlsteps/04displacement.h src/smlsteps/04displacement.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/smlsteps/04displacement.cpp -o build/smlsteps_04displacement.o
+	@echo "build/smlsteps_04displacement.o created."
 
 
-build/simulation-steps_03-timestep.o: src/simulation-steps/03-timestep.h src/simulation-steps/03-timestep.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/03-timestep.cpp -o build/simulation-steps_03-timestep.o
-	@echo "build/simulation-steps_03-timestep.o created."
-
-
-build/simulation-steps_04-displacement.o: src/simulation-steps/04-displacement.h src/simulation-steps/04-displacement.cpp src/head/decltypedef.h
-	g++ -c -Wall -std=c++17 -Isrc/ src/simulation-steps/04-displacement.cpp -o build/simulation-steps_04-displacement.o
-	@echo "build/simulation-steps_04-displacement.o created."
+build/smlsteps_manager.o: src/smlsteps/manager.h src/smlsteps/manager.cpp src/head/decltypedef.h
+	g++ -c -Wall -std=c++17 -Isrc/ src/smlsteps/manager.cpp -o build/smlsteps_manager.o
+	@echo "build/smlsteps_manager.o created."

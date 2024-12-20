@@ -11,7 +11,7 @@ int main()
 	func::Global::simulate(
 		data.radius,
 		data.mnsc,
-		data.diamension
+		data.dimension
 	);
 	return 0;
 }

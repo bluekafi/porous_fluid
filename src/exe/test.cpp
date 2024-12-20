@@ -56,7 +56,7 @@ int main()
 	fileio::Data data = fileio::Read::loop_until_proper_files();
 
 	const std::vector<std::vector<int>> add_mnsc
-		= func::Determine::gen_add_mnsc(data.mnsc, data.diamension);
+		= func::Determine::gen_add_mnsc(data.mnsc, data.dimension);
 
 	cmdio::Print::table(add_mnsc);
 
@@ -138,10 +138,10 @@ Tdouble v
 math::Linear::gauss_elimination(v);
 
 
-// Tests for diamension
+// Tests for dimension
 
-dst::Diamension d1(2, 4);
-dst::Diamension d2(6, 4);
+dst::Dimension d1(2, 4);
+dst::Dimension d2(6, 4);
 
 std::cout << "total-nodes=" << d1.total_nodes() << std::endl;
 std::cout << "rows=" << d1.node_rows() << std::endl;

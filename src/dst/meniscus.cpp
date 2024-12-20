@@ -1,4 +1,4 @@
-#include "dstmns.h"
+#include "dst/meniscus.h"
 
 dst::Mns::Mns(): n(0), type(1), pos(2) {} //by default everything is the defending fluid
 
