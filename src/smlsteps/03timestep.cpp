@@ -1,6 +1,6 @@
 #include "functimestep.h"
 
-double func::TimeStep::decide_time_step(const Tdouble& radius, const Tdouble& velocity, const dst::Dimension& dimension)
+double func::TimeStep::decide_time_step(const Tdouble& radius, const Tdouble& velocity, const network::Dimension& dimension)
 {
 	double max_vel = 0;
 

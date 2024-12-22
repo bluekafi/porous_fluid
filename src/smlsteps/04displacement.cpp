@@ -21,7 +21,7 @@ func::Integration::IntegrationResult func::Integration::integrate(
 	const TMns& mnsc,
 	const Tdouble& velocity,
 	const Tdouble& volume,
-	const dst::Dimension& dimension,
+	const network::Dimension& dimension,
 	const double time_step
 )
 {
@@ -57,7 +57,7 @@ func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_
 	const TMns& mnsc,
 	const Tdouble& velocity,
 	const Tdouble& volume,
-	const dst::Dimension& dimension,
+	const network::Dimension& dimension,
 	const double time_step
 )
 {
@@ -213,7 +213,7 @@ TMns func::Integration::combine_fluid_additions
 	const Tdouble& radius,
 	TMns mnsc,
 	const Tdouble& velocity,
-	const dst::Dimension& dimension,
+	const network::Dimension& dimension,
 	const TFluid& fluid_addition_table
 )
 {

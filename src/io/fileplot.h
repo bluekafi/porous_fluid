@@ -1,7 +1,7 @@
 #ifndef FILEPLOT_H
 #define FILEPLOT_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "declconst.h"
 #include "declfilename.h"
 #include "drw/bmp.h"

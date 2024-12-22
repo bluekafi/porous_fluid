@@ -1,7 +1,7 @@
 #ifndef FUNCVELOCITY_H
 #define FUNCVELOCITY_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "dstdimension.h"
 
 namespace func
@@ -15,7 +15,7 @@ namespace func
 			const TMns& mnsc,
 			const std::vector<std::vector<int>>& add_mnsc,
 			const std::vector<double>& pressure,
-			const dst::Dimension& dimension
+			const network::Dimension& dimension
 		);
 
 		static Tdouble refine_velocity(Tdouble v);

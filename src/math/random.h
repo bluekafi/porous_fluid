@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 
-namespace utility
+namespace math
 {
 	class Random
 	{
@@ -15,7 +15,7 @@ namespace utility
 		static int integer(const int max);
 		static int integer(const int min, const int max);
 		static double fraction(const double decimal_shift);
-		
+
 	};
 }
 

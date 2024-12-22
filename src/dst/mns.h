@@ -1,13 +1,13 @@
 #ifndef MNS_H
 #define MNS_H
 
-#include "declconst.h"
+#include "head/decl.h"
 #include <list>
 #include <vector>
 #include <fstream>
-#include <iostream>
-#include <algorithm>
-#include <cmath>
+//~ #include <iostream>
+//~ #include <algorithm>
+//~ #include <cmath>
 
 namespace dst
 {

@@ -1,7 +1,7 @@
 #ifndef FILEIOWRITE_H
 #define FILEIOWRITE_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "declfilename.h"
 
 #include <string>

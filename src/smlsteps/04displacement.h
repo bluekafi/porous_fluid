@@ -1,7 +1,7 @@
 #ifndef FUNCINTEGRATION_H
 #define FUNCINTEGRATION_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "dstdimension.h"
 #include <algorithm>
 
@@ -52,7 +52,7 @@ namespace func
 			const TMns& mnsc,
 			const Tdouble& velocity,
 			const Tdouble& volume,
-			const dst::Dimension& dimension,
+			const network::Dimension& dimension,
 			const double time_step
 			);
 
@@ -65,7 +65,7 @@ namespace func
 			const Tdouble& radius,
 			TMns mnsc,
 			const Tdouble& velocity,
-			const dst::Dimension& dimension,
+			const network::Dimension& dimension,
 			const TFluid& fluid_addition_table
 			);
 
@@ -83,7 +83,7 @@ namespace func
 			const TMns& mnsc,
 			const Tdouble& velocity,
 			const Tdouble& volume,
-			const dst::Dimension& dimension,
+			const network::Dimension& dimension,
 			const double time_step
 			);
 

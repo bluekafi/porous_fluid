@@ -1,7 +1,7 @@
 #ifndef FUNCDETERMINE_H
 #define FUNCDETERMINE_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "dstdimension.h"
 
 namespace func
@@ -12,11 +12,11 @@ namespace func
 
 	public:
 
-		static Tdouble determine_volume(const Tdouble& radius, const Tdouble& velocity, const double time_step, const dst::Dimension& dimension);
+		static Tdouble determine_volume(const Tdouble& radius, const Tdouble& velocity, const double time_step, const network::Dimension& dimension);
 
 		static std::vector<std::vector<int>> gen_add_mnsc(
 			const TMns& mnsc,
-			const dst::Dimension& dimension
+			const network::Dimension& dimension
 		);
 	};
 }

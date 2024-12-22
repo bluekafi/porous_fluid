@@ -1,94 +1,107 @@
-#include "fileioread.h"
+#include "io/fileread.h"
 
-std::pair<Tdouble, bool> fileio::Read::read_radius()
+std::pair<Tdouble, bool> io::FileRead::radius()
 {
-	return read_file<double>(declfilename::FILE_RADIUS);
+	return io::FileRead::table<double>(decl::file::input::RADIUS);
 }
 
-std::pair<TMns, bool> fileio::Read::read_mnsc()
+std::pair<Tdouble, bool> io::FileRead::length()
 {
-	return read_file<dst::Mns>(declfilename::FILE_MNSC);
+	return io::FileRead::table<double>(decl::file::input::LENGTH);
 }
 
-fileio::Data fileio::Read::all()
+std::pair<dst::Parameter, bool> io::FileRead::parameter()
 {
-	Data data;
-	data.success = false;
-
-	const auto radius = read_radius();
-	if(!radius.second)
+	std::ifstream fin(decl::file::input::PARAMETER);
+	std::vector<std::string> buffer_line_vec;
+	std::string buffer_str;
+	while(fin >> buffer_str)
 	{
-		std::cout << "ERR-radius.txt is corrupted" << std::endl;
-		return data;
-	}
-	data.radius = radius.first;
-
-	const auto mnsc = read_mnsc();
-	if(!mnsc.second)
-	{
-		std::cout << "ERR-mnsc.txt meniscus configuration file is corrupted" << std::endl;
-		return data;
-	}
-	data.mnsc = mnsc.first;
-
-	const dst::Dimension dradius(data.radius);
-	const dst::Dimension dmnsc(data.mnsc);
-	if(!(dradius == dmnsc))
-	{
-		std::cout << "ERR-Dimensions of radius.txt and mnsc.txt do not match" << std::endl;
-		return data;
+		buffer_line_vec.push_back(buffer_str);
 	}
 
-	data.dimension = dradius;
-	data.success = true;
-	return data;
-}
-
-fileio::Data fileio::Read::loop_until_proper_files()
-{
-	fileio::Data input_data;
-	input_data.success = false;
-	while(!input_data.success)
+	dst::Parameter parameter;
+	for(const std::string& line_str: buffer_line_vec)
 	{
-		std::cout << "FDK-reading input files" << std::endl;
-		input_data = all();
-		if(input_data.success)
+		const std::string name = line_str.substr(0, line_str.find('='));
+		const double value = std::stod(line_str.substr(line_str.find('=') + 1));
+		const bool success = parameter.set(name, value);
+		if(!success)
 		{
-			std::cout << "FDK-Files are read correctly" << std::endl;
-		}
-		else
-		{
-			std::cout << "ERR-problem in input files, please correct the files and press [ENTER]" << std::endl;
-			std::cin.get();
+			std::cout << "-ERR- parameter.txt is corrupted, failure reading" << line_str << std::endl;
+			return {parameter, false};
 		}
 	}
-	return input_data;
+
+	return {parameter, true};
 }
 
-std::map<std::string, dst::Dimension> fileio::Read::dimension()
+std::pair<TMns, bool> io::FileRead::mnsc()
 {
-	std::map<std::string, dst::Dimension> outmap;
+	return io::FileRead::table<dst::Mns>(decl::file::input::MNSC);
+}
 
-	std::pair<Tdouble, bool> radius = read_radius();
-	if(radius.second)
+io::InputFiles io::FileRead::all()
+{
+	InputFiles input_files;
+	input_files.success = false;
+
+	// STEP-1.1 read radius
+	const auto& buffer_radius = io::FileRead::radius();
+	if(!buffer_radius.second)
 	{
-		outmap.insert({declfilename::FILE_RADIUS, dst::Dimension(radius.first)});
+		std::cout << "-ERR-radius.txt is corrupted" << std::endl;
+		return input_files;
 	}
-	else
+	input_files.tradius = buffer_radius.first;
+
+	// STEP-1.2 read mnsc
+	const auto& buffer_mnsc = io::FileRead::mnsc();
+	if(!buffer_mnsc.second)
 	{
-		std::cout << "-FDK-radius file is still bad" << std::endl;
+		std::cout << "-ERR-mnsc.txt meniscus configuration file is corrupted" << std::endl;
+		return input_files;
+	}
+	input_files.tmnsc = buffer_mnsc.first;
+
+	// STEP-1.3 read length
+	const auto& buffer_length = io::FileRead::length();
+	if(!buffer_length.second)
+	{
+		std::cout << "-ERR-length.txt meniscus file is corrupted" << std::endl;
+		return input_files;
+	}
+	input_files.tlength = buffer_length.first;
+
+	// STEP-1.4 read parameter
+	const auto& buffer_parameter = io::FileRead::parameter();
+	if(!buffer_parameter.second)
+	{
+		std::cout << "-ERR-parameter meniscus file is corrupted" << std::endl;
+		return input_files;
+	}
+	input_files.parameter = buffer_parameter.first;
+
+
+	input_files.dimension = network::Dimension(input_files.tradius);
+	const network::Dimension dmnsc(input_files.tmnsc);
+	const network::Dimension dlength(input_files.tlength);
+
+	// STEP-2.1 check if tmns dimensions are okay
+	if(!(input_files.dimension == dmnsc))
+	{
+		std::cout << "-ERR-Dimensions of tmns.txt is not correct" << std::endl;
+		return input_files;
 	}
 
-	std::pair<TMns, bool> mnsc = read_mnsc();
-	if(mnsc.second)
+	// STEP-2.2 check if tlength dimensions are okay
+	if(!(input_files.dimension == dlength))
 	{
-		outmap.insert({declfilename::FILE_MNSC, dst::Dimension(mnsc.first)});
-	}
-	else
-	{
-		std::cout << "-FDK-mnsc file is still bad" << std::endl;
-
+		std::cout << "-ERR-Dimensions of tlength.txt is not correct" << std::endl;
+		return input_files;
 	}
 
-	return outmap;
+	input_files.success = true;
+	std::cout << "--FDK-All input files read correctly" << std::endl;
+	return input_files;
 }

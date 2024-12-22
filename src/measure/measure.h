@@ -1,7 +1,7 @@
 #ifndef FUNCMEASURE_H
 #define FUNCMEASURE_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "dstdimension.h"
 
 namespace func
@@ -72,7 +72,7 @@ namespace func
 			const int col_b,
 			const int row_e,
 			const int col_e,
-			const dst::Dimension& dm
+			const network::Dimension& dm
 		);
 
 		static double measure_wetting_fluid_proportion(const Tdouble& radius, const TMns& mnsc);

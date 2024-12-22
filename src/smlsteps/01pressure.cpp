@@ -4,7 +4,7 @@ Tdouble func::Pressure::generate_equations_aug_matrix(
 	const Tdouble& radius,
 	const TMns& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
-	const dst::Dimension& dimension,
+	const network::Dimension& dimension,
 	const double total_flow_rate
 )
 {
@@ -132,7 +132,7 @@ std::vector<double> func::Pressure::calculate_pressure(
 	const Tdouble& radius,
 	const TMns& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
-	const dst::Dimension& dimension,
+	const network::Dimension& dimension,
 	const double total_flow_rate
 )
 {

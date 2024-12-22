@@ -33,7 +33,7 @@ void PrintSatVSsX(
 	}
 }
 
-double CalculateBlue(const Tdouble& radius, const TMns& mnsc, const dst::Dimension& dimension)
+double CalculateBlue(const Tdouble& radius, const TMns& mnsc, const network::Dimension& dimension)
 {
 	double volume_total = 0;
 	for(int row = 0; row < dimension.rows; ++ row)
@@ -79,7 +79,7 @@ std::vector<double> SaturationsForEachX(const Tdouble& radius, const TMns& mnsc)
 }
 
 const double CalculateTotalVolumeOfSystem(
-		const dst::Dimension& dimension)
+		const network::Dimension& dimension)
 {
 	double total_volume_system = 0;
 	for(int row = 0; row < dimension.rows; ++ row)
@@ -223,7 +223,7 @@ void ShowProgress(const double progress, int& last_count)
 }
 
 
-void func::Global::simulate(const Tdouble& radius, TMns& mnsc, const dst::Dimension& dimension)
+void func::Global::simulate(const Tdouble& radius, TMns& mnsc, const network::Dimension& dimension)
 {
 
 	int count = 10000;

@@ -1,9 +1,10 @@
-#ifndef DSTDIAMENSION_H
-#define DSTDIAMENSION_H
+#ifndef NETWORK_DIMENSION_H
+#define NETWORK_DIMENSION_H
 
-#include "decltypedef.h"
+#include "head/type.h"
+#include <iostream>
 
-namespace dst
+namespace network
 {
 	struct Tube
 	{
@@ -37,7 +38,7 @@ namespace dst
 			const int row,
 			const int col) const;
 
-		std::vector<dst::Tube> generate_tubes_connected_to_node(int row, int col) const;
+		std::vector<network::Tube> generate_tubes_connected_to_node(int row, int col) const;
 
 		template<class T>
 		std::vector<std::vector<T>> empty_table_templated() const;
@@ -55,10 +56,10 @@ namespace dst
 }
 
 template<class T>
-std::vector<std::vector<T>> dst::Dimension::empty_table_templated() const
+std::vector<std::vector<T>> network::Dimension::empty_table_templated() const
 {
 	return std::vector<std::vector<T>>(this->rows, std::vector<T>(this->cols));
 }
 
-std::ostream& operator<< (std::ostream& cout, const dst::Tube& tube);
+std::ostream& operator<< (std::ostream& cout, const network::Tube& tube);
 #endif

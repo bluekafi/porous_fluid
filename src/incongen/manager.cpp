@@ -1,6 +1,55 @@
 #include "initconmode.h"
 
-void initcon::Mode::Generate::radius(const dst::Dimension& dimension)
+
+
+math::Random::seed();
+	std::cout << PROGRAM_PROPERTY_NAME << std::endl;
+
+	char command_main_menu;
+	const std::string text_promt_main_menu = "f)iltration-mode g)enerate, m)odify, i)mhibition-generator";
+	while(!initcon::Mode::Main::exit_code_main_menu(text_promt_main_menu, command_main_menu))
+	{
+		if(command_main_menu == 'f')
+		{
+			std::cout << "-filtration-mode-new" << std::endl;
+			initcon::Mode::Main::generate_for_filtration();
+		}
+		else if(command_main_menu == 'g')
+		{
+			std::cout << "-generate mode" << std::endl;
+			initcon::Mode::Main::generate();
+		}
+		else if(command_main_menu == 'm')
+		{
+			std::cout << "-modify mode" << std::endl;
+			initcon::Mode::Main::modify();
+		}
+		else if(command_main_menu == 'i')
+		{
+			std::cout << "-imhibition_generator mode" << std::endl;
+			initcon::Mode::Main::imhibition_generator();
+		}
+		else
+		{
+			std::cout << "-ERR-IPT-input command_char is not valid" << std::endl;
+			continue;
+		}
+		// Display the status of the files
+		const fileio::Data data = fileio::Read::all();
+		if(data.success)
+		{
+			std::cout << "-FDK-All files are good" << std::endl;
+		}
+		else
+		{
+			std::cout << "-ERR-problems with input files" << std::endl;
+		}
+	}
+
+	std::cout << "program exited: " << PROGRAM_PROPERTY_NAME << std::endl;
+
+
+void initcon::Mode::Generate::radius(const network::Dimension& dimension)
 {
 	const auto def_radius = cmdio::Read::command_general<double>(
 		"default value of radius");
@@ -10,7 +59,7 @@ void initcon::Mode::Generate::radius(const dst::Dimension& dimension)
 	fileio::Write::run(r);
 }
 
-void initcon::Mode::Generate::mnsc(const dst::Dimension& dimension)
+void initcon::Mode::Generate::mnsc(const network::Dimension& dimension)
 {
 	const TMns m(dimension.rows,
 		std::vector<dst::Mns>(dimension.cols));
@@ -26,7 +75,7 @@ void initcon::Mode::Main::generate()
 	int nrows, ncols;
 	std::cin >> nrows >> ncols;
 
-	const dst::Dimension dimension(nrows, ncols);
+	const network::Dimension dimension(nrows, ncols);
 
 	// Ask which file to rewrite
 	const char cmd_file_regen = cmdio::Read::command_char(
@@ -461,7 +510,7 @@ Tdouble sinosodial_radius_generator(const int rows, const int cols)
 	const double A = 4;
 	const double B = 0.8;
 
-	const dst::Dimension dimension(rows, cols);
+	const network::Dimension dimension(rows, cols);
 	auto radius = dimension.empty_table();
 	for(int row = 0; row < dimension.rows; ++ row)
 	{

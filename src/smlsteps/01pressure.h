@@ -1,7 +1,7 @@
 #ifndef FUNCPRESSURE_H
 #define FUNCPRESSURE_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "declconst.h"
 #include "dstdimension.h"
 #include "cmdioprint.h"
@@ -16,7 +16,7 @@ namespace func
 				const Tdouble& radius,
 				const TMns& mnsc,
 				const std::vector<std::vector<int>>& add_mnsc,
-				const dst::Dimension& dimension,
+				const network::Dimension& dimension,
 				const double total_flow_rate
 			);
 
@@ -31,7 +31,7 @@ namespace func
 			const Tdouble& radius,
 			const TMns& mnsc,
 			const std::vector<std::vector<int>>& add_mnsc,
-			const dst::Dimension& dimension,
+			const network::Dimension& dimension,
 			const double total_flow_rate
 		);
 	};

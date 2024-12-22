@@ -13,7 +13,7 @@
 #include "functimestep.h"
 #include "funcvelocity.h"
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "declconst.h"
 
 struct ConfigAtMomentTime
@@ -51,7 +51,7 @@ namespace func
 		);
 	public:
 		static void simulate(const Tdouble& radius,
-			TMns& mnsc, const dst::Dimension& dimension);
+			TMns& mnsc, const network::Dimension& dimension);
 	};
 }
 

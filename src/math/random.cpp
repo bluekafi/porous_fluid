@@ -1,26 +1,26 @@
-#include "utilityrandom.h"
+#include "mathrandom.h"
 
-void utility::Random::seed()
+void math::Random::seed()
 {
 	srand(std::time(nullptr));
 }
 
-int utility::Random::integer()
+int math::Random::integer()
 {
 	return rand();
 }
 
-int utility::Random::integer(const int max)
+int math::Random::integer(const int max)
 {
 	return integer() % max;
 }
 
-int utility::Random::integer(const int min, const int max)
+int math::Random::integer(const int min, const int max)
 {
 	return integer(max - min) + min;
 }
 
-double utility::Random::fraction(const double decimal_shift)
+double math::Random::fraction(const double decimal_shift)
 {
 	double ans = 0;
 	double divider = 1;

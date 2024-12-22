@@ -1,7 +1,7 @@
 #ifndef CMDIOPRINT_H
 #define CMDIOPRINT_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include "fileioread.h"
 
 #include <iostream>

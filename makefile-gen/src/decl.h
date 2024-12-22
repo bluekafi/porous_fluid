@@ -33,6 +33,7 @@ namespace decl
 		"result",
 		"result/calculation",
 		"result/graph",
+		"result/initial",
 		"result/noradius",
 		"result/pressure",
 		"result/thick",

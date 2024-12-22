@@ -1,11 +1,13 @@
-head/decltypedef
+head/decl
+head/type
 
 exe/incongen
 exe/plot
 exe/simulate
 exe/test
 
-dst/meniscus
+dst/mns
+dst/parameter
 
 drw/bmp
 
@@ -26,7 +28,8 @@ network/dimension
 
 algo/determine
 
-smlsteps/manager   
+simulate/manager
+
 smlsteps/01pressure           
 smlsteps/02velocity
 smlsteps/03timestep

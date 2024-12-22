@@ -7,7 +7,7 @@ Tdouble func::Velocity::calculate_velocity
 	const TMns& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
 	const std::vector<double>& pressure,
-	const dst::Dimension& dimension
+	const network::Dimension& dimension
 )
 {
 	Tdouble velocity = dimension.empty_table();

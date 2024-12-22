@@ -1,99 +1,79 @@
-#ifndef FILEREAD_H
-#define FILEREAD_H
+#ifndef IO_FILEREAD_H
+#define IO_FILEREAD_H
 
-#include "dstdimension.h"
-#include "decltypedef.h"
-#include "declfilename.h"
+#include "network/dimension.h"
+#include "dst/parameter.h"
 
-#include <string>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <utility>
-#include <map>
-
-namespace fileio
+namespace io
 {
-	struct Data
+	struct InputFiles
 	{
-		Tdouble radius;
-		TMns mnsc;
-		dst::Dimension dimension;
+		Tdouble tradius;
+		TMns tmnsc;
+		Tdouble tlength;
+		dst::Parameter parameter;
+		network::Dimension dimension;
 		bool success;
 	};
 
-	class Read
+	class FileRead
 	{
 
 		template<class T>
-		static std::vector<std::vector<T>> table_from_linear(
-			const std::vector<T>& lineardata, const int rows,
-			const int cols);
-
-		template<class T>
-		static std::pair<std::vector<std::vector<T>>, bool> read_file(
+		static std::pair<std::vector<std::vector<T>>, bool> table(
 			const std::string& file_name);
 
 	public:
-		static std::pair<Tdouble, bool> read_radius();
-		static std::pair<TMns, bool> read_mnsc();
-		static std::map<std::string, dst::Dimension> dimension();
-		static Data all();
-		static Data loop_until_proper_files();
+		static std::pair<Tdouble, bool> radius();
+		static std::pair<TMns, bool> mnsc();
+		static std::pair<Tdouble, bool> length();
+		static std::pair<dst::Parameter, bool> parameter();
+		static InputFiles all();
 	};
 }
 
 template<class T>
-std::vector<std::vector<T>> fileio::Read::table_from_linear(const std::vector<T>& lineardata, const int rows, const int cols)
+std::pair<std::vector<std::vector<T>>, bool> io::FileRead::table(const std::string& file_name)
 {
-	std::vector<std::vector<T>> table(rows, std::vector<T>(cols));
-	int count = 0;
-	for(auto& row: table)
-	{
-		for(auto& cell: row)
-		{
-			cell = lineardata[count ++];
-		}
-	}
+	std::pair<std::vector<std::vector<T>>, bool> buffer;
+	buffer.second = false;
 
-	return table;
-}
-
-template<class T>
-std::pair<std::vector<std::vector<T>>, bool> fileio::Read::read_file(const std::string& file_name)
-{
 	std::ifstream fin(file_name);
-
-	std::pair<std::vector<std::vector<T>>, bool> outdata;
-	outdata.second = false;
-
 	if(!fin)
 	{
 		std::cout << "-ERR-" << file_name << " does not exist, create using generate or restore manually." << std::endl;
-		return outdata;
+		return buffer;
 	}
 
 	int rows, cols;
 	fin >> rows >> cols;
 
-	std::vector<T> lineardata;
+	std::vector<T> buffer_vec;
 	T ipt;
 	while(fin >> ipt)
 	{
-		lineardata.push_back(ipt);
+		buffer_vec.push_back(ipt);
 	}
 
 
-	if(lineardata.size() != size_t(rows * cols))
+	if(buffer_vec.size() != size_t(rows * cols))
 	{
 		std::cout << "-ERR-in file " << file_name << " rows, cols are declared differently than the actual data in them." << std::endl;
-		return outdata;
+		return buffer;
 	}
 
-	outdata.first = table_from_linear(lineardata, rows, cols);
-	outdata.second = true;
+	buffer.first = std::vector<std::vector<T>>(rows, std::vector<T>(cols));
+	int count = 0;
+	for(auto& row: buffer.first)
+	{
+		for(auto& cell: row)
+		{
+			cell = buffer_vec[count ++];
+		}
+	}
+	buffer.second = true;
 
-	return outdata;
+	return buffer;
 }
 
 #endif

@@ -140,8 +140,8 @@ math::Linear::gauss_elimination(v);
 
 // Tests for dimension
 
-dst::Dimension d1(2, 4);
-dst::Dimension d2(6, 4);
+network::Dimension d1(2, 4);
+network::Dimension d2(6, 4);
 
 std::cout << "total-nodes=" << d1.total_nodes() << std::endl;
 std::cout << "rows=" << d1.node_rows() << std::endl;

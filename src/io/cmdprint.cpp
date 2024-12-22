@@ -97,7 +97,7 @@ void cmdio::Print::pmnsc(const TMns& matrix)
 
 void cmdio::Print::dimension()
 {
-	const std::map<std::string, dst::Dimension> lst_dimension =
+	const std::map<std::string, network::Dimension> lst_dimension =
 		fileio::Read::dimension();
 
 	for(const auto& [file_name, d]: lst_dimension)

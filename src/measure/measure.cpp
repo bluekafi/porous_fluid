@@ -27,7 +27,7 @@ func::Measure::FluidPpr func::Measure::fluid_ppr(
 	const int col_b,
 	const int row_e,
 	const int col_e,
-	const dst::Dimension& dm
+	const network::Dimension& dm
 )
 {
 	FluidPpr fluidp(time);

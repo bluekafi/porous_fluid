@@ -1,26 +1,24 @@
-#ifndef INITCONMODE_H
-#define INITCONMODE_H
+#ifndef INCONGEN_MANAGER_H
+#define INCONGEN_MANAGER_H
 
-#include "cmdioread.h"
-#include "cmdioprint.h"
-#include "dstdimension.h"
-#include "fileiowrite.h"
-#include "dst/meniscus.h"
-#include "fileioread.h"
-
-#include "declconst.h"
-
-#include "utilityrandom.h"
-#include <cmath>
-namespace initcon
+namespace incongen
 {
-class Mode
+	const std::string PROGRAM_NAME = "incongen INitial_CONditions_GENerator";
+
+	class Manager
 	{
-		class Generate
+	public:
+		static void run();
+	};
+}
+
+
+
+class Generate
 		{
 		public:
-			static void radius(const dst::Dimension& dimension);
-			static void mnsc(const dst::Dimension& dimension);
+			static void radius(const network::Dimension& dimension);
+			static void mnsc(const network::Dimension& dimension);
 		};
 
 		class Modify
@@ -60,7 +58,6 @@ class Mode
 			static void imhibition_generator();
 		};
 	};
-}
 
 
 template <class T>
@@ -128,5 +125,6 @@ std::vector<std::vector<T>>
 	}
 
 	return table;
+}
 }
 #endif

@@ -1,7 +1,7 @@
 #ifndef MATHLINEAR_H
 #define MATHLINEAR_H
 
-#include "decltypedef.h"
+#include "head/decl.h"
 #include <vector>
 #include "cmdioprint.h"
 

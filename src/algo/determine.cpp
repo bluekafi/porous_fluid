@@ -5,7 +5,7 @@ Tdouble func::Determine::determine_volume
 	const Tdouble& radius,
 	const Tdouble& velocity,
 	const double time_step,
-	const dst::Dimension& dimension
+	const network::Dimension& dimension
 )
 {
 	Tdouble volume = dimension.empty_table();
@@ -23,7 +23,7 @@ Tdouble func::Determine::determine_volume
 	return volume;
 }
 
-std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const TMns& mnsc, const dst::Dimension& dimension)
+std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const TMns& mnsc, const network::Dimension& dimension)
 {
 	std::vector<std::vector<int>> add_mnsc = dimension.empty_table_templated<int>();
 
