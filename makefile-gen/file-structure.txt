@@ -7,17 +7,27 @@ exe/simulate
 exe/test
 
 dst/mns
+dst/txtincongen
 dst/parameter
+dst/inputfiles
 
 drw/bmp
 
 incongen/manager
+incongen/garbage
+incongen/fromfile
+incongen/fromcmd
+incongen/tradius
+incongen/tlength
+incongen/tmns
+incongen/parameter
 
 io/cmdprint     
 io/cmdread
 io/fileplot
 io/fileread
 io/filewrite
+
 
 math/gausslinear
 math/random
