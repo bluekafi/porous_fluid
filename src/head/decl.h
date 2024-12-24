@@ -21,6 +21,7 @@ namespace decl
 			const std::string LENGTH = FOLDER + "tlength.txt";
 			const std::string MNSC = FOLDER + "tmns.txt";
 			const std::string PARAMETER = FOLDER + "parameter.txt";
+			const std::string INCONGEN = FOLDER + "incongen.txt";
 		}
 
 		namespace output

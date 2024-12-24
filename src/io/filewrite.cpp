@@ -1,16 +1,45 @@
 #include "io/fileread.h"
 
-void fileio::Write::run(const Tdouble& radius)
+void fileio::FileWrite::tradius(const Tdouble& tradius)
 {
-	write_base(declfilename::FILE_RADIUS, radius);
+	write_base(decl::file::input::RADIUS, tradius);
 }
 
-void fileio::Write::run(const TMns& mnsc)
+void fileio::FileWrite::tlength(const Tdouble& tlength)
 {
-	write_base(declfilename::FILE_MNSC, mnsc);
+	write_base(decl::file::input::LENGTH, tlength);
 }
 
-void fileio::Write::fluid_ppr(
+void fileio::FileWrite::tmns(const TMns& tmns)
+{
+	write_base(decl::file::input::MNSC, tmns);
+}
+
+void fileio::FileWrite::sample_incongen_txt()
+{
+	std::ofstream fout(decl::file::input::INCONGEN);
+
+	for(const dst::TxtIncongenCaregotyAndValues& category_and_values:
+		dst::txt_incongen_category_and_values_vec)
+	{
+		const std::string& category
+			= category_and_values.category;
+		const std::vector<std::string>& values
+			= category_and_values.values;
+
+		fout << category << "=";
+		for(int i = 0; i < int(values.size()); ++ i)
+		{
+			if(i) fout << "/";
+			fout << values[i];
+		}
+
+		fout << '\n';
+	}
+
+}
+
+void fileio::FileWrite::fluid_ppr(
 	const std::vector<std::string>& header,
 	const std::vector<std::vector<double>>& table
 )

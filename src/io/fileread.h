@@ -6,16 +6,6 @@
 
 namespace io
 {
-	struct InputFiles
-	{
-		Tdouble tradius;
-		TMns tmnsc;
-		Tdouble tlength;
-		dst::Parameter parameter;
-		network::Dimension dimension;
-		bool success;
-	};
-
 	class FileRead
 	{
 
@@ -24,11 +14,13 @@ namespace io
 			const std::string& file_name);
 
 	public:
+		static std::pair<dst::TxtIncongen, bool> txt_incongen();
 		static std::pair<Tdouble, bool> radius();
 		static std::pair<TMns, bool> mnsc();
 		static std::pair<Tdouble, bool> length();
 		static std::pair<dst::Parameter, bool> parameter();
-		static InputFiles all();
+		static dst::InputFiles all();
+
 	};
 }
 

@@ -105,3 +105,39 @@ io::InputFiles io::FileRead::all()
 	std::cout << "--FDK-All input files read correctly" << std::endl;
 	return input_files;
 }
+
+
+
+std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
+{
+	std::pair<dst::TxtIncongen, bool> buffer;
+	buffer.second = false;
+	std::ifstream fin(decl::file::input::INCONGEN);
+
+	if(!fin)
+	{
+		return buffer;
+	}
+
+	std::string buffer_line;
+	std::set<std::string> buffer_categories_set;
+	while(fin >> buffer_line)
+	{
+		const bool set = buffer.first.set(buffer_line);
+		if(!set)
+		{
+			return buffer;
+		}
+		buffer_categories_set.insert(algo::Utility::split(buffer_line).first);
+	}
+
+	if(buffer_categories_set != dst::TxtIncongen::categories_set())
+	{
+		std::cout << "--ERR-input/incongen.txt does not have all the categories, forcefully rewriting it" << std::endl;
+		return false;
+	}
+
+
+	buffer.second = true;
+	return buffer;
+}

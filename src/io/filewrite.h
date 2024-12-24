@@ -2,32 +2,35 @@
 #define FILEIOWRITE_H
 
 #include "head/decl.h"
-#include "declfilename.h"
+#include "head/type.h"
+#include "dst/txtincongen"
+//~ #include <string>
+//~ #include <vector>
+//~ #include <fstream>
 
-#include <string>
-#include <vector>
-#include <fstream>
-
-namespace fileio
+namespace io
 {
-	class Write
+	class FileWrite
 	{
 		template <class T>
-		static void write_base(const std::string& file_name,
+		static void write_base(
+			const std::string& file_name,
 			const std::vector<std::vector<T>>& table);
 
 	public:
-		static void run(const Tdouble& radius);
-		static void run(const TMns& mnsc);
+		static void tradius(const Tdouble& radius);
+		static void tlength(const TMns& mnsc);
+		static void tmns(const TMns& mnsc);
+		static void parameter();
+		static void sample_txt_incongen();
 		static void fluid_ppr(
 			const std::vector<std::string>& header,
-			const std::vector<std::vector<double>>& table
-		);
+			const std::vector<std::vector<double>>& table);
 	};
 }
 
 template <class T>
-void fileio::Write::write_base(const std::string& file_name,
+void io::FileWrite::write_base(const std::string& file_name,
 	const std::vector<std::vector<T>>& table)
 {
 	std::ofstream fout(file_name);
