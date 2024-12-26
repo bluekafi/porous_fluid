@@ -7,7 +7,7 @@ bool incongen::FromFile::generate()
 	// if bad write a default template and return false
 
 	const std::pair<dst::TxtIncongen, bool>& txt_incongen
-		= io::FileRead::txt_incongen();
+		= io::FileRead::read_incongen();
 
 	if(!txt_incongen.second)
 	{
@@ -15,10 +15,9 @@ bool incongen::FromFile::generate()
 		return false;
 
 	}
-	// generate and write to tradius
-	// generate and write to tlength
-	// generate and write to tmns
-	// if parameter is bad, generate and write to parameter
+
+	const dst::TxtIncongen& settings = txt_incongen.first;
+
 
 	return true;
 }

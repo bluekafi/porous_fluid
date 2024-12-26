@@ -14,7 +14,7 @@ namespace io
 			const std::string& file_name);
 
 	public:
-		static std::pair<dst::TxtIncongen, bool> txt_incongen();
+		static std::pair<dst::TxtIncongen, bool> read_incongen();
 		static std::pair<Tdouble, bool> radius();
 		static std::pair<TMns, bool> mnsc();
 		static std::pair<Tdouble, bool> length();

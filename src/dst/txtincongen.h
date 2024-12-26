@@ -3,31 +3,84 @@
 
 namespace dst
 {
-	namespace txt_incongen
+	namespace decls_incongen_nps
 	{
+		namespace possible_nps
+		{
+			namespace cats_nps
+			{
+				const std::string nrows = "nrows";
+				const std::string ncols = "ncols";
+				const std::string tradius = "tradius";
+				const std::string tlength = "tlength";
+				const std::string tmns = "tmns";
+			}
+
+			namespace vals_nps
+			{
+				std::string constant = "const";
+				namespace radius_nps
+				{
+					const std::string imbibition = "imbibiton";
+					const std::string constant = constant;
+					const std::string function = "function";
+				}
+
+				namespace length_nps
+				{
+					const std::string constant = constant;
+					const std::string inverseradius = "inverseradius";
+				}
+
+				namespace mns_nps
+				{
+					const std::string saturate_oil = "saturate_oil";
+					const std::string saturate_water = "saturate_water";
+					const std::string imbibition = "imbibition";
+				}
+			}
+		}
+
 		struct CategoryAndValues
 		{
 			std::string category;
 			std::vector<std::string> values;
 		};
 
-		namespace cat_str
-		{
-			const std::string nrows = "nrows";
-			const std::string ncols = "ncols";
-			const std::string tradius = "tradius";
-			const std::string tlength = "tlength";
-			const std::string tmns = "tmns";
-		}
-
 		const std::vector<CategoryAndValues>
 		category_and_values_vec
 		{
-			{cat_str::nrows, {"40"}},
-			{cat_str::ncols, {"40"}},
-			{cat_str::tradius, {"const=3.00", "imbibition", "function"}},
-			{cat_str::tlength, {"const=1.15", "inverseradius"}},
-			{cat_str::tmns, {"saturate_oil", "saturate_water", "imbibition"}}
+			{
+				cats_nps::nrows, {"40"}
+			},
+
+			{
+				cats_nps::ncols, {"40"}
+			},
+
+			{
+				cats_nps::tradius,
+				{
+					possible_nps::vals_nps::radius_nps::constant,
+					possible_nps::vals_nps::radius_nps::imbibition,
+					possible_nps::vals_nps::radius_nps::function
+				}
+			},
+			{
+				cats_nps::tlength,
+				{
+					possible_nps::vals_nps::length_nps::constant,
+					possible_nps::vals_nps::length_nps::inverseradius
+				}
+			},
+			{
+				cats_nps::tmns,
+				{
+					possible_nps::vals_nps::mns_nps::imbibition,
+					possible_nps::vals_nps::mns_nps::saturate_water,
+					possible_nps::vals_nps::mns_nps::saturate_oil
+				}
+			}
 		};
 	}
 
@@ -41,6 +94,9 @@ namespace dst
 		std::string tmns;
 		bool set();
 		static std::set<std::string> categories_set(const std::string& buffer_line);
+		static bool is_const(const std::string& s);
+		static std::pair<std::string, double> match_with_val(const std::string& s, const std::vector<std::string>& v);
+		static std::vector<std::string> find_vals_of_corresponding_cats(const std::string& s);
 	};
 
 }

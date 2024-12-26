@@ -108,25 +108,24 @@ io::InputFiles io::FileRead::all()
 
 
 
-std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
+std::pair<dst::TxtIncongen, bool> io::FileRead::read_incongen()
 {
-	std::pair<dst::TxtIncongen, bool> buffer;
-	buffer.second = false;
+	dst::TxtIncongen buffer;
 	std::ifstream fin(decl::file::input::INCONGEN);
 
 	if(!fin)
 	{
-		return buffer;
+		return {buffer, false};
 	}
 
 	std::string buffer_line;
 	std::set<std::string> buffer_categories_set;
 	while(fin >> buffer_line)
 	{
-		const bool set = buffer.first.set(buffer_line);
+		const bool set = buffer.set(buffer_line);
 		if(!set)
 		{
-			return buffer;
+			return {buffer, false};
 		}
 		buffer_categories_set.insert(algo::Utility::split(buffer_line).first);
 	}
@@ -134,10 +133,9 @@ std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
 	if(buffer_categories_set != dst::TxtIncongen::categories_set())
 	{
 		std::cout << "--ERR-input/incongen.txt does not have all the categories, forcefully rewriting it" << std::endl;
-		return false;
+		return {buffer, false};
 	}
 
 
-	buffer.second = true;
-	return buffer;
+	return {buffer, true};
 }
