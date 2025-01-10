@@ -1,11 +1,11 @@
 #include "io/fileread.h"
 
-std::pair<Tdouble, bool> io::FileRead::radius()
+std::pair<tdouble_type, bool> io::FileRead::radius()
 {
 	return io::FileRead::table<double>(decl::file::input::RADIUS);
 }
 
-std::pair<Tdouble, bool> io::FileRead::length()
+std::pair<tdouble_type, bool> io::FileRead::length()
 {
 	return io::FileRead::table<double>(decl::file::input::LENGTH);
 }
@@ -36,7 +36,7 @@ std::pair<dst::Parameter, bool> io::FileRead::parameter()
 	return {parameter, true};
 }
 
-std::pair<TMns, bool> io::FileRead::mnsc()
+std::pair<tmns_type, bool> io::FileRead::mnsc()
 {
 	return io::FileRead::table<dst::Mns>(decl::file::input::MNSC);
 }
@@ -62,7 +62,7 @@ io::InputFiles io::FileRead::all()
 		std::cout << "-ERR-mnsc.txt meniscus configuration file is corrupted" << std::endl;
 		return input_files;
 	}
-	input_files.tmnsc = buffer_mnsc.first;
+	input_files.tmns_typec = buffer_mnsc.first;
 
 	// STEP-1.3 read length
 	const auto& buffer_length = io::FileRead::length();
@@ -84,13 +84,13 @@ io::InputFiles io::FileRead::all()
 
 
 	input_files.dimension = network::Dimension(input_files.tradius);
-	const network::Dimension dmnsc(input_files.tmnsc);
+	const network::Dimension dmnsc(input_files.tmns_typec);
 	const network::Dimension dlength(input_files.tlength);
 
-	// STEP-2.1 check if tmns dimensions are okay
+	// STEP-2.1 check if tmns_type dimensions are okay
 	if(!(input_files.dimension == dmnsc))
 	{
-		std::cout << "-ERR-Dimensions of tmns.txt is not correct" << std::endl;
+		std::cout << "-ERR-Dimensions of tmns_type.txt is not correct" << std::endl;
 		return input_files;
 	}
 

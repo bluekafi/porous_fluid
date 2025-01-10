@@ -50,7 +50,7 @@ void initcon::Mode::Generate::radius(const network::Dimension& dimension)
 {
 	const auto def_radius = cmdio::Read::command_general<double>(
 		"default value of radius");
-	const Tdouble r(dimension.rows, std::vector<double>(
+	const tdouble_type r(dimension.rows, std::vector<double>(
 		dimension.cols, def_radius));
 
 	fileio::Write::run(r);
@@ -58,7 +58,7 @@ void initcon::Mode::Generate::radius(const network::Dimension& dimension)
 
 void initcon::Mode::Generate::mnsc(const network::Dimension& dimension)
 {
-	const TMns m(dimension.rows,
+	const tmns_type m(dimension.rows,
 		std::vector<dst::Mns>(dimension.cols));
 
 	fileio::Write::run(m);
@@ -115,7 +115,7 @@ void initcon::Mode::Main::modify()
 	std::cout << "-EXT-exited modify" << std::endl;
 }
 
-Tdouble initcon::Mode::Modify::add_random_temporary(Tdouble radius)
+tdouble_type initcon::Mode::Modify::add_random_temporary(tdouble_type radius)
 {
 	const double random = declconst::FINE_RADIUS_RANDOMNESS;
 	for(auto& row: radius)
@@ -132,7 +132,7 @@ Tdouble initcon::Mode::Modify::add_random_temporary(Tdouble radius)
 void initcon::Mode::Modify::add_random_to_radius()
 {
 	const std::string file_name = declfilename::FILE_RADIUS;
-	const std::pair<Tdouble, bool> data = fileio::Read::read_radius();
+	const std::pair<tdouble_type, bool> data = fileio::Read::read_radius();
 
 	if(data.second == false)
 	{
@@ -140,7 +140,7 @@ void initcon::Mode::Modify::add_random_to_radius()
 		return;
 	}
 
-	Tdouble radius = data.first;
+	tdouble_type radius = data.first;
 	cmdio::Print::pmat(file_name + " original", radius);
 
 	char command_char = 'r';
@@ -166,7 +166,7 @@ void initcon::Mode::Modify::add_random_to_radius()
 void initcon::Mode::Modify::mnsc()
 {
 	const std::string file_name = declfilename::FILE_MNSC;
-	const std::pair<TMns, bool> data = fileio::Read::read_mnsc();
+	const std::pair<tmns_type, bool> data = fileio::Read::read_mnsc();
 
 	if(data.second == false)
 	{
@@ -234,7 +234,7 @@ bool initcon::Mode::Modify::exit_code_modify_dst(const std::string& text_promt_m
 void initcon::Mode::Modify::radius()
 {
 	const std::string file_name = declfilename::FILE_RADIUS;
-	const std::pair<Tdouble, bool> data = fileio::Read::read_radius();
+	const std::pair<tdouble_type, bool> data = fileio::Read::read_radius();
 
 	if(data.second == false)
 	{
@@ -270,7 +270,7 @@ void initcon::Mode::Main::imhibition_generator()
 	const double rad_inner = 1;
 	const double initial_fill = 0.30; //from the blue side
 
-	Tdouble radius(size, std::vector<double>(size, rad_outer));
+	tdouble_type radius(size, std::vector<double>(size, rad_outer));
 	for(int row = leave; row + leave < size; ++ row)
 	{
 		for(int col = leave; col + leave < size; ++ col)
@@ -282,7 +282,7 @@ void initcon::Mode::Main::imhibition_generator()
 	fileio::Write::run(radius);
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	TMns mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
@@ -325,7 +325,7 @@ void initcon::Mode::Main::imhibition_generator()
 	const double rad_inner = 1;
 	const double initial_fill = 0.20; //from the blue side
 
-	Tdouble radius(size, std::vector<double>(size, rad_outer));
+	tdouble_type radius(size, std::vector<double>(size, rad_outer));
 	for(int row = leave; row + leave < size; ++ row)
 	{
 		for(int col = leave; col + leave < size; ++ col)
@@ -337,7 +337,7 @@ void initcon::Mode::Main::imhibition_generator()
 	fileio::Write::run(radius);
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	TMns mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
@@ -414,13 +414,13 @@ double FuncThickAsCoordinate(
 	return thick_v[distance % thick_len];
 }
 
-Tdouble GenerateBiscuitTypeGridSystemAlterThickThin(
+tdouble_type GenerateBiscuitTypeGridSystemAlterThickThin(
 	const int size,
 	const int leave)
 {
 	const std::vector<double> biscuit_thickness_v{6, 5, 4, 3, 2};
 	const std::vector<double> filler_row(size, biscuit_thickness_v.front());
-	Tdouble radius(size, filler_row);
+	tdouble_type radius(size, filler_row);
 
 	for(int row = leave; row + leave < size; ++ row)
 	{
@@ -440,14 +440,14 @@ Tdouble GenerateBiscuitTypeGridSystemAlterThickThin(
 	return radius;
 }
 
-TMns GenerateMnsDistibWithInterfaceInThinnerRegion(
+tmns_type GenerateMnsDistibWithInterfaceInThinnerRegion(
 	const int size,
 	const int leave)
 {
 	const double initial_fill = 0.80; //from the blue side
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	TMns mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
@@ -487,15 +487,15 @@ void initcon::Mode::Main::imhibition_generator()
 	const int leave = 0;
 
 
-	//const Tdouble radius = GenerateBiscuitTypeGridSystemAlterThickThin(size, leave);
+	//const tdouble_type radius = GenerateBiscuitTypeGridSystemAlterThickThin(size, leave);
 	//fileio::Write::run(radius);
 
-	const TMns mnsc = GenerateMnsDistibWithInterfaceInThinnerRegion(size, leave);
+	const tmns_type mnsc = GenerateMnsDistibWithInterfaceInThinnerRegion(size, leave);
 	fileio::Write::run(mnsc);
 }
 
 
-Tdouble sinosodial_radius_generator(const int rows, const int cols)
+tdouble_type sinosodial_radius_generator(const int rows, const int cols)
 {
 	const double l =1;
 	const double delta_small = std::sqrt(2) * l;
@@ -530,7 +530,7 @@ void initcon::Mode::Main::generate_for_filtration()
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
 	const dst::Mns mns_grey(0, 1, -1, -1);
-	TMns mnsc(
+	tmns_type mnsc(
 			rows,
 			std::vector<dst::Mns>(cols, mns_grey)
 		);

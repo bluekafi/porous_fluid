@@ -116,14 +116,14 @@ void process(const dst::Mns& mns, const double vel, const int direc)
 	std::cout << "blue=" << vol.front() / declconst::PI << ", grey=" << vol.back() / declconst::PI;
 }
 
-Tdouble v
+tdouble_type v
 {
 	{2, -1, -1, 10}, //s12 = 10
 	{-1, 2, -1, -110}, //s13 = -100
 	{-1, -1, 2, 100}
 };
 
-Tdouble v
+tdouble_type v
 {
 	{1,1,2,1,1,0,1,8},
 	{2,1,2,3,1,3,0,21},

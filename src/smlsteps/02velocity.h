@@ -10,15 +10,15 @@ namespace func
 	{
 
 	public:
-		static Tdouble calculate_velocity(
-			const Tdouble& radius,
-			const TMns& mnsc,
+		static tdouble_type calculate_velocity(
+			const tdouble_type& radius,
+			const tmns_type& mnsc,
 			const std::vector<std::vector<int>>& add_mnsc,
 			const std::vector<double>& pressure,
 			const network::Dimension& dimension
 		);
 
-		static Tdouble refine_velocity(Tdouble v);
+		static tdouble_type refine_velocity(tdouble_type v);
 	};
 }
 

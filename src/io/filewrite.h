@@ -18,9 +18,9 @@ namespace io
 			const std::vector<std::vector<T>>& table);
 
 	public:
-		static void tradius(const Tdouble& radius);
-		static void tlength(const TMns& mnsc);
-		static void tmns(const TMns& mnsc);
+		static void tradius(const tdouble_type& radius);
+		static void tlength(const tmns_type& mnsc);
+		static void tmns_type(const tmns_type& mnsc);
 		static void parameter();
 		static void sample_txt_incongen();
 		static void fluid_ppr(

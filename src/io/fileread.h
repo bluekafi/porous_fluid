@@ -15,9 +15,9 @@ namespace io
 
 	public:
 		static std::pair<dst::TxtIncongen, bool> read_incongen();
-		static std::pair<Tdouble, bool> radius();
-		static std::pair<TMns, bool> mnsc();
-		static std::pair<Tdouble, bool> length();
+		static std::pair<tdouble_type, bool> radius();
+		static std::pair<tmns_type, bool> mnsc();
+		static std::pair<tdouble_type, bool> length();
 		static std::pair<dst::Parameter, bool> parameter();
 		static dst::InputFiles all();
 

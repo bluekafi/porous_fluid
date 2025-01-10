@@ -11,7 +11,7 @@ namespace math
 	{
 	public:
 
-		static std::vector<double> gauss_elimination(Tdouble M);
+		static std::vector<double> gauss_elimination(tdouble_type M);
 	};
 }
 

@@ -43,9 +43,9 @@ namespace network
 		template<class T>
 		std::vector<std::vector<T>> empty_table_templated() const;
 
-		Tdouble empty_table() const;
-		Tdouble empty_table(const int rows, const int cols) const;
-		Tdouble empty_aug_matrix() const;
+		tdouble_type empty_table() const;
+		tdouble_type empty_table(const int rows, const int cols) const;
+		tdouble_type empty_aug_matrix() const;
 
 		bool operator== (const Dimension& other) const;
 

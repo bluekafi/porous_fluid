@@ -1,18 +1,18 @@
 #include "io/fileread.h"
 
-void fileio::FileWrite::tradius(const Tdouble& tradius)
+void fileio::FileWrite::tradius(const tdouble_type& tradius)
 {
 	write_base(decl::file::input::RADIUS, tradius);
 }
 
-void fileio::FileWrite::tlength(const Tdouble& tlength)
+void fileio::FileWrite::tlength(const tdouble_type& tlength)
 {
 	write_base(decl::file::input::LENGTH, tlength);
 }
 
-void fileio::FileWrite::tmns(const TMns& tmns)
+void fileio::FileWrite::tmns_type(const tmns_type& tmns_type)
 {
-	write_base(decl::file::input::MNSC, tmns);
+	write_base(decl::file::input::MNSC, tmns_type);
 }
 
 void fileio::FileWrite::sample_incongen_txt()

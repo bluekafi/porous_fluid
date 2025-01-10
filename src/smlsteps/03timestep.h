@@ -10,7 +10,7 @@ namespace func
 	{
 
 	public:
-		static double decide_time_step(const Tdouble& radius, const Tdouble& velocity, const network::Dimension& dimension);
+		static double decide_time_step(const tdouble_type& radius, const tdouble_type& velocity, const network::Dimension& dimension);
 	};
 }
 

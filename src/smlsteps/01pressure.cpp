@@ -1,14 +1,14 @@
 #include "funcpressure.h"
 
-Tdouble func::Pressure::generate_equations_aug_matrix(
-	const Tdouble& radius,
-	const TMns& mnsc,
+tdouble_type func::Pressure::generate_equations_aug_matrix(
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
 	const network::Dimension& dimension,
 	const double total_flow_rate
 )
 {
-	Tdouble equations_matrix = dimension.empty_aug_matrix();
+	tdouble_type equations_matrix = dimension.empty_aug_matrix();
 	const int linear_node_input_pressure = dimension.total_nodes() - 1;
 	for(int row = 0; row < dimension.node_rows(); ++ row)
 	{
@@ -129,14 +129,14 @@ Tdouble func::Pressure::generate_equations_aug_matrix(
 }
 
 std::vector<double> func::Pressure::calculate_pressure(
-	const Tdouble& radius,
-	const TMns& mnsc,
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
 	const network::Dimension& dimension,
 	const double total_flow_rate
 )
 {
-	const Tdouble equations
+	const tdouble_type equations
 		= func::Pressure::generate_equations_aug_matrix(
 				radius,
 				mnsc,

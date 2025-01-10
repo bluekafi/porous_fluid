@@ -12,10 +12,10 @@ namespace func
 
 	public:
 
-		static Tdouble determine_volume(const Tdouble& radius, const Tdouble& velocity, const double time_step, const network::Dimension& dimension);
+		static tdouble_type determine_volume(const tdouble_type& radius, const tdouble_type& velocity, const double time_step, const network::Dimension& dimension);
 
 		static std::vector<std::vector<int>> gen_add_mnsc(
-			const TMns& mnsc,
+			const tmns_type& mnsc,
 			const network::Dimension& dimension
 		);
 	};

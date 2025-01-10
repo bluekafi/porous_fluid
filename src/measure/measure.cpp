@@ -1,6 +1,6 @@
 #include "funcmeasure.h"
 
-double func::Measure::measure_wetting_fluid_proportion(const Tdouble& radius, const TMns& mnsc)
+double func::Measure::measure_wetting_fluid_proportion(const tdouble_type& radius, const tmns_type& mnsc)
 {
 	const int n = radius.size();
 	const int m = radius.front().size();
@@ -20,8 +20,8 @@ double func::Measure::measure_wetting_fluid_proportion(const Tdouble& radius, co
 }
 
 func::Measure::FluidPpr func::Measure::fluid_ppr(
-	const Tdouble& radius,
-	const TMns& mnsc,
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
 	const double time,
 	const int row_b,
 	const int col_b,

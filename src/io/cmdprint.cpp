@@ -1,6 +1,6 @@
 #include "cmdioprint.h"
 
-void cmdio::Print::pmat(const std::string& s, const Tdouble& matrix)
+void cmdio::Print::pmat(const std::string& s, const tdouble_type& matrix)
 {
 	const int n = matrix.size();
 	const int m = matrix.front().size();
@@ -50,7 +50,7 @@ void cmdio::Print::pmat(const std::string& s, const std::vector<double>& v, cons
 }
 
 
-void cmdio::Print::pmat(const std::string& s, const TMns& matrix)
+void cmdio::Print::pmat(const std::string& s, const tmns_type& matrix)
 {
 	std::cout << std::endl << s << std::string(100, '-') << std::endl;
 
@@ -77,7 +77,7 @@ void cmdio::Print::pmat(const std::string& s, const TMns& matrix)
 }
 
 
-void cmdio::Print::pmnsc(const TMns& matrix)
+void cmdio::Print::pmnsc(const tmns_type& matrix)
 {
 	std::cout << std::endl << "MNSC LONG" << std::string(100, '-') << std::endl;
 

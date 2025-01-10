@@ -33,7 +33,7 @@ void PrintSatVSsX(
 	}
 }
 
-double CalculateBlue(const Tdouble& radius, const TMns& mnsc, const network::Dimension& dimension)
+double CalculateBlue(const tdouble_type& radius, const tmns_type& mnsc, const network::Dimension& dimension)
 {
 	double volume_total = 0;
 	for(int row = 0; row < dimension.rows; ++ row)
@@ -52,7 +52,7 @@ double CalculateBlue(const Tdouble& radius, const TMns& mnsc, const network::Dim
 	return declconst::PI * volume_total * declconst::TUBE_LENGTH_CONST;
 }
 
-std::vector<double> SaturationsForEachX(const Tdouble& radius, const TMns& mnsc)
+std::vector<double> SaturationsForEachX(const tdouble_type& radius, const tmns_type& mnsc)
 {
 	const int y_total = radius.size();
 	const int x_total = radius.front().size();
@@ -162,7 +162,7 @@ void SmartPrintRoughPressureVsTime(
 
 void func::Global::SmartPrint(
 		const std::vector<ConfigAtMomentTime>& vec,
-		const Tdouble& radius
+		const tdouble_type& radius
 	)
 {
 	//std::cout << "work here" << std::endl;
@@ -223,7 +223,7 @@ void ShowProgress(const double progress, int& last_count)
 }
 
 
-void func::Global::simulate(const Tdouble& radius, TMns& mnsc, const network::Dimension& dimension)
+void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const network::Dimension& dimension)
 {
 
 	int count = 10000;
@@ -291,7 +291,7 @@ void func::Global::simulate(const Tdouble& radius, TMns& mnsc, const network::Di
 		//cmdio::Print::pmat("pressure", pressure, radius.size(), radius.front().size());
 
 		// step-2 VELOCITY
-		const Tdouble velocity
+		const tdouble_type velocity
 			= func::Velocity::calculate_velocity(
 				radius, mnsc, add_msn, pressure, dimension);
 
@@ -393,13 +393,13 @@ void func::Global::simulate(const Tdouble& radius, TMns& mnsc, const network::Di
 	//fileio::Write::fluid_ppr(func::Measure::FluidPpr::header(), fluid_ppr_vec);
 }
 
-void func::Global::makeplot(const Tdouble& radius, const TMns& mnsc, const int count, const double clock)
+void func::Global::makeplot(const tdouble_type& radius, const tmns_type& mnsc, const int count, const double clock)
 {
 	fileio::Plot::with_radius(mnsc, radius, clock, count);
 	fileio::Plot::without_radius(mnsc, count);
 }
 
-bool func::Global::within_limits_fluid_first_type(const Tdouble& radius, const TMns& mnsc, double& proportion)
+bool func::Global::within_limits_fluid_first_type(const tdouble_type& radius, const tmns_type& mnsc, double& proportion)
 {
 	proportion = func::Measure::measure_wetting_fluid_proportion(radius, mnsc);
 	return proportion <= declconst::MAX_WETTING_PROPORTION;

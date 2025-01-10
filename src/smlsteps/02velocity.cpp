@@ -1,16 +1,16 @@
 #include "funcvelocity.h"
 
 
-Tdouble func::Velocity::calculate_velocity
+tdouble_type func::Velocity::calculate_velocity
 (
-	const Tdouble& radius,
-	const TMns& mnsc,
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
 	const std::vector<std::vector<int>>& add_mnsc,
 	const std::vector<double>& pressure,
 	const network::Dimension& dimension
 )
 {
-	Tdouble velocity = dimension.empty_table();
+	tdouble_type velocity = dimension.empty_table();
 	for(int row = 0; row < dimension.rows; ++ row)
 	{
 		for(int col = 0; col < dimension.cols; ++ col)
@@ -36,7 +36,7 @@ Tdouble func::Velocity::calculate_velocity
 	return refine_velocity(velocity);
 }
 
-Tdouble func::Velocity::refine_velocity(Tdouble v)
+tdouble_type func::Velocity::refine_velocity(tdouble_type v)
 {
 	double max = -1;
 	for(const auto& row: v)

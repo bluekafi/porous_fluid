@@ -2,7 +2,7 @@
 
 
 /*
- * integrate returns a Tmns - new meniscus configuration
+ * integrate returns a tmns_type - new meniscus configuration
  *
  *
  */
@@ -17,10 +17,10 @@
  */
 
 func::Integration::IntegrationResult func::Integration::integrate(
-	const Tdouble& radius,
-	const TMns& mnsc,
-	const Tdouble& velocity,
-	const Tdouble& volume,
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
+	const tdouble_type& velocity,
+	const tdouble_type& volume,
 	const network::Dimension& dimension,
 	const double time_step
 )
@@ -53,10 +53,10 @@ func::Integration::IntegrationResult func::Integration::integrate(
 
 func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_table
 (
-	const Tdouble& radius,
-	const TMns& mnsc,
-	const Tdouble& velocity,
-	const Tdouble& volume,
+	const tdouble_type& radius,
+	const tmns_type& mnsc,
+	const tdouble_type& velocity,
+	const tdouble_type& volume,
 	const network::Dimension& dimension,
 	const double time_step
 )
@@ -208,11 +208,11 @@ func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_
 	return result;
 }
 
-TMns func::Integration::combine_fluid_additions
+tmns_type func::Integration::combine_fluid_additions
 (
-	const Tdouble& radius,
-	TMns mnsc,
-	const Tdouble& velocity,
+	const tdouble_type& radius,
+	tmns_type mnsc,
+	const tdouble_type& velocity,
 	const network::Dimension& dimension,
 	const TFluid& fluid_addition_table
 )

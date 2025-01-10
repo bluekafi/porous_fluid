@@ -95,17 +95,17 @@ std::vector<network::Tube> network::Dimension::generate_tubes_connected_to_node(
 	return tubes_connected_vec;
 }
 
-Tdouble network::Dimension::empty_table() const
+tdouble_type network::Dimension::empty_table() const
 {
 	return empty_table(this->rows, this->cols);
 }
 
-Tdouble network::Dimension::empty_table(const int rows, const int cols) const
+tdouble_type network::Dimension::empty_table(const int rows, const int cols) const
 {
-	return Tdouble(rows, std::vector<double>(cols));
+	return tdouble_type(rows, std::vector<double>(cols));
 }
 
-Tdouble network::Dimension::empty_aug_matrix() const
+tdouble_type network::Dimension::empty_aug_matrix() const
 {
 	const int total_num_nodes = this->total_nodes();
 	return empty_table(total_num_nodes, total_num_nodes + 1);

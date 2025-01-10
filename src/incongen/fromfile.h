@@ -3,6 +3,9 @@
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
+#include "incongen/tradius.h"
+#include "incongen/tmns_type.h"
+#include "incongen/tlength.h"
 
 namespace incongen
 {

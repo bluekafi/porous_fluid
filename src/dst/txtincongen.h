@@ -13,7 +13,7 @@ namespace dst
 				const std::string ncols = "ncols";
 				const std::string tradius = "tradius";
 				const std::string tlength = "tlength";
-				const std::string tmns = "tmns";
+				const std::string tmns_type = "tmns_type";
 			}
 
 			namespace vals_nps
@@ -61,7 +61,7 @@ namespace dst
 			{
 				cats_nps::tradius,
 				{
-					possible_nps::vals_nps::radius_nps::constant,
+					possible_nps::vals_nps::radius_nps::constant + "=1.13",
 					possible_nps::vals_nps::radius_nps::imbibition,
 					possible_nps::vals_nps::radius_nps::function
 				}
@@ -69,12 +69,12 @@ namespace dst
 			{
 				cats_nps::tlength,
 				{
-					possible_nps::vals_nps::length_nps::constant,
+					possible_nps::vals_nps::length_nps::constant + "2.12",
 					possible_nps::vals_nps::length_nps::inverseradius
 				}
 			},
 			{
-				cats_nps::tmns,
+				cats_nps::tmns_type,
 				{
 					possible_nps::vals_nps::mns_nps::imbibition,
 					possible_nps::vals_nps::mns_nps::saturate_water,
@@ -91,7 +91,7 @@ namespace dst
 		int ncols;
 		std::pair<std::string, double> tradius;
 		std::pair<std::string, double> tlength;
-		std::string tmns;
+		std::string tmns_type;
 		bool set();
 		static std::set<std::string> categories_set(const std::string& buffer_line);
 		static bool is_const(const std::string& s);

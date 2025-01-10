@@ -17,8 +17,10 @@ bool incongen::FromFile::generate()
 	}
 
 	const dst::TxtIncongen& settings = txt_incongen.first;
-
-
+	incongen::TRadius::write_to_file(settings.tradius);
+	incongen::TLength::write_to_file(settings.tlength);
+	incongen::TMns::write_to_file(settings.tmns);
+	// about parameter we think a bit later
 	return true;
 }
 

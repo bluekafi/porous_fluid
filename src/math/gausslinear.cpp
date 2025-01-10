@@ -1,7 +1,7 @@
 #include "mathlinear.h"
 typedef long double lld;
 
-std::vector<double> math::Linear::gauss_elimination(Tdouble M)
+std::vector<double> math::Linear::gauss_elimination(tdouble_type M)
 {
 	const int n = M.size();
 

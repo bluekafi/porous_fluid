@@ -1,6 +1,6 @@
 #include "fileioplot.h"
 
-void fileio::Plot::without_radius(TMns mnsc, int count)
+void fileio::Plot::without_radius(tmns_type mnsc, int count)
 {
 
 	std::reverse(mnsc.begin(), mnsc.end());
@@ -36,7 +36,7 @@ void fileio::Plot::without_radius(TMns mnsc, int count)
 }
 
 //Tested works Correctly
-void fileio::Plot::with_radius(TMns mnsc, Tdouble radius, double clock, int count)
+void fileio::Plot::with_radius(tmns_type mnsc, tdouble_type radius, double clock, int count)
 {
 	const int rows = radius.size();
 	const int cols = radius.front().size();

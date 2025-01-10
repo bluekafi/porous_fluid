@@ -60,7 +60,7 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 		this->tlength = buffer_match.first;
 		return true;
 	}
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tmns)
+	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tmns_type)
 	{
 		const std::vector<std::string>& possible_vals
 			= find_vals_of_corresponding_cats(category);
@@ -74,7 +74,7 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 			return false;
 		}
 
-		this->tmns = value;
+		this->tmns_type = value;
 		return true;
 	}
 

@@ -19,7 +19,7 @@
 struct ConfigAtMomentTime
 {
 	double clock;
-	TMns mnsc;
+	tmns_type mnsc;
 	double pressure_input;
 	double volume_injected;
 	double flow_rate_at_this_step;
@@ -32,26 +32,26 @@ namespace func
 	{
 		static void makeplot
 		(
-			const Tdouble& radius,
-			const TMns& mnsc,
+			const tdouble_type& radius,
+			const tmns_type& mnsc,
 			const int count,
 			const double clock
 		);
 
 		static bool within_limits_fluid_first_type
 		(
-			const Tdouble& radius,
-			const TMns& mnsc,
+			const tdouble_type& radius,
+			const tmns_type& mnsc,
 			double& proportion
 		);
 
 		static void SmartPrint(
 				const std::vector<ConfigAtMomentTime>& vec,
-				const Tdouble& radius
+				const tdouble_type& radius
 		);
 	public:
-		static void simulate(const Tdouble& radius,
-			TMns& mnsc, const network::Dimension& dimension);
+		static void simulate(const tdouble_type& radius,
+			tmns_type& mnsc, const network::Dimension& dimension);
 	};
 }
 

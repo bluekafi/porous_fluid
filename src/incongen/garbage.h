@@ -25,7 +25,7 @@ class Modify
 	static std::pair<std::vector<std::vector<T>>, bool>
 		modify_dst_from_cin(std::vector<std::vector<T>> table);
 
-	static Tdouble add_random_temporary(Tdouble radius);
+	static tdouble_type add_random_temporary(tdouble_type radius);
 public:
 	static void radius();
 	static void mnsc();

@@ -1,14 +1,14 @@
 #include "algo/determine.h"
 
-Tdouble func::Determine::determine_volume
+tdouble_type func::Determine::determine_volume
 (
-	const Tdouble& radius,
-	const Tdouble& velocity,
+	const tdouble_type& radius,
+	const tdouble_type& velocity,
 	const double time_step,
 	const network::Dimension& dimension
 )
 {
-	Tdouble volume = dimension.empty_table();
+	tdouble_type volume = dimension.empty_table();
 
 	for(int row = 0; row < dimension.rows; ++ row)
 	{
@@ -23,7 +23,7 @@ Tdouble func::Determine::determine_volume
 	return volume;
 }
 
-std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const TMns& mnsc, const network::Dimension& dimension)
+std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const tmns_type& mnsc, const network::Dimension& dimension)
 {
 	std::vector<std::vector<int>> add_mnsc = dimension.empty_table_templated<int>();
 
