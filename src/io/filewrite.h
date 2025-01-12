@@ -19,8 +19,8 @@ namespace io
 
 	public:
 		static void tradius(const tdouble_type& radius);
-		static void tlength(const tmns_type& mnsc);
-		static void tmns_type(const tmns_type& mnsc);
+		static void tlength(const tmns_type& mns);
+		static void tmns_type(const tmns_type& mns);
 		static void parameter();
 		static void sample_txt_incongen();
 		static void fluid_ppr(

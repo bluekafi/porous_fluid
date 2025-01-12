@@ -3,6 +3,14 @@
 
 namespace dst
 {
+	namespace decls_parameter_nps
+	{
+		const std::string sigma = "sigma";
+		const std::string mu_water = "mu_water";
+		const std::string mu_oil = "mu_oil";
+		const std::string total_volumetric_flow_rate = "total_volumetric_flow_rate";
+		
+	}
 	class Parameter
 	{
 	public:

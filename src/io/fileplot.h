@@ -14,8 +14,8 @@ namespace fileio
 	{
 
 	public:
-		static void without_radius(tmns_type mnsc, int count);
-		static void with_radius(tmns_type mnsc, tdouble_type radius, double clock, int count);
+		static void without_radius(tmns_type mns, int count);
+		static void with_radius(tmns_type mns, tdouble_type radius, double clock, int count);
 	};
 }
 #endif

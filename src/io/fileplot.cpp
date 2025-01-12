@@ -1,13 +1,13 @@
 #include "fileioplot.h"
 
-void fileio::Plot::without_radius(tmns_type mnsc, int count)
+void fileio::Plot::without_radius(tmns_type mns, int count)
 {
 
-	std::reverse(mnsc.begin(), mnsc.end());
+	std::reverse(mns.begin(), mns.end());
 
 	const int image_size = declconst::IMAGE_SIZE;
-	const int cols = mnsc.front().size();
-	const int rows = mnsc.size();
+	const int cols = mns.front().size();
+	const int rows = mns.size();
 
 	const int length = image_size / (std::max(rows, cols) + 2);
 
@@ -21,7 +21,7 @@ void fileio::Plot::without_radius(tmns_type mnsc, int count)
 	int y = start_y;
 	for(int row = 0; row < rows; ++ row)
 	{
-		const auto& w = mnsc[row];
+		const auto& w = mns[row];
 		int x = start_x + length * (row % 2);
 		for(int col = 0; col < cols; ++ col)
 		{
@@ -36,11 +36,11 @@ void fileio::Plot::without_radius(tmns_type mnsc, int count)
 }
 
 //Tested works Correctly
-void fileio::Plot::with_radius(tmns_type mnsc, tdouble_type radius, double clock, int count)
+void fileio::Plot::with_radius(tmns_type mns, tdouble_type radius, double clock, int count)
 {
 	const int rows = radius.size();
 	const int cols = radius.front().size();
-	std::reverse(mnsc.begin(), mnsc.end());
+	std::reverse(mns.begin(), mns.end());
 	std::reverse(radius.begin(), radius.end());
 
 	double max_radius = -1;
@@ -56,8 +56,8 @@ void fileio::Plot::with_radius(tmns_type mnsc, tdouble_type radius, double clock
 	}
 
 	const int image_size = declconst::IMAGE_SIZE;
-	const int length = mnsc.front().size();
-	const int height = mnsc.size();
+	const int length = mns.front().size();
+	const int height = mns.size();
 
 	const int effective_length = image_size / (std::max(length, height) + 2);
 
@@ -72,7 +72,7 @@ void fileio::Plot::with_radius(tmns_type mnsc, tdouble_type radius, double clock
 	int y = start_y;
 	for(int row = 0; row < rows; ++ row)
 	{
-		const auto& w = mnsc[row];
+		const auto& w = mns[row];
 		int x = start_x + effective_length * (row % 2);
 		for(int col = 0; col < cols; ++ col)
 		{

@@ -1,12 +1,11 @@
 #include "dst/txtincongen.h"
 
-std::set<std::string> dst::TxtIncongen::categories_set()
+std::set<std::string> dst::TxtIncongen::set_of_categories()
 {
 	std::set<std::string> set;
-	for(const auto& category_and_values: dst::txt_incongen::category_and_values_vec)
+	for(const auto& category_and_values: dst::decls_incongen_nps::category_and_values_vec)
 	{
-		const std::string& category = category_and_value.category;
-		set.insert(category);
+		set.insert(category_and_value.category);
 	}
 
 	return set;
@@ -31,7 +30,7 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tradius)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cats(category);
+			= find_vals_of_corresponding_cat(category);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
 			= match_with_val(value, possible_vals);
@@ -47,7 +46,7 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tlength)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cats(category);
+			= find_vals_of_corresponding_cat(category);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
 			= match_with_val(value, possible_vals);
@@ -63,7 +62,7 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tmns_type)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cats(category);
+			= find_vals_of_corresponding_cat(category);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
 			= match_with_val(value, possible_vals);
@@ -114,7 +113,7 @@ std::pair<std::pair<std::string, double>, bool> dst::TxtIncongen::match_with_val
 }
 
 
-std::vector<std::string> dst::TxtIncongen::find_vals_of_corresponding_cats(const std::string& s)
+std::vector<std::string> dst::TxtIncongen::find_vals_of_corresponding_cat(const std::string& s)
 {
 	for(const dst::decls_incongen_nps::CategoryAndValues& cv:
 		dst::decls_incongen_nps::category_and_values_vec)

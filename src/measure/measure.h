@@ -66,7 +66,7 @@ namespace func
 
 		static FluidPpr fluid_ppr(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
+			const tmns_type& mns,
 			const double time,
 			const int row_b,
 			const int col_b,
@@ -75,7 +75,7 @@ namespace func
 			const network::Dimension& dm
 		);
 
-		static double measure_wetting_fluid_proportion(const tdouble_type& radius, const tmns_type& mnsc);
+		static double measure_wetting_fluid_proportion(const tdouble_type& radius, const tmns_type& mns);
 	};
 }
 

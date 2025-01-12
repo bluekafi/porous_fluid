@@ -2,19 +2,26 @@
 
 bool dst::Parameter::set(const std::string& name_parameter, const double value)
 {
-	const std::map<std::string, int*> name_to_variable
+	if(name_parameter == dst::decls_parameter_nps::mu_oil)
 	{
-		{"sigma", &sigma}
-		{"mu_water", &mu_water}
-		{"mu_oil", &mu_oil}
-		{"total_volumetric_flow_rate", &total_volumetric_flow_rate}
+		this->mu_oil = value;
+		return true;
 	}
-
-	if(name_to_variable.count(name_parameter) == 0)
+	if(name_parameter == dst::decls_parameter_nps::mu_water)
 	{
-		return false;
+		this->mu_water = value;
+		return true;
 	}
-
-	(*(name_to_variable.at(name_parameter))) = value;
-	return true;
+	if(name_parameter == dst::decls_parameter_nps::sigma)
+	{
+		this->sigma = value;
+		return true;
+	}
+	if(name_parameter == dst::decls_parameter_nps::total_volumetric_flow_rate)
+	{
+		this->total_volumetric_flow_rate = value;
+		return true;
+	}
+	
+	return false;
 }

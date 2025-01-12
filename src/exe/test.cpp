@@ -55,10 +55,10 @@ int main()
 {
 	fileio::Data data = fileio::Read::loop_until_proper_files();
 
-	const std::vector<std::vector<int>> add_mnsc
-		= func::Determine::gen_add_mnsc(data.mnsc, data.dimension);
+	const std::vector<std::vector<int>> add_mns
+		= func::Determine::gen_add_mns(data.mns, data.dimension);
 
-	cmdio::Print::table(add_mnsc);
+	cmdio::Print::table(add_mns);
 
 	return 0;
 }

@@ -6,11 +6,10 @@ namespace dst
 	struct InputFiles
 	{
 		tdouble_type tradius;
-		tmns_type tmns_typec;
+		tmns_type tmns;
 		tdouble_type tlength;
 		dst::Parameter parameter;
 		network::Dimension dimension;
-		bool success;
 	};
 }
 

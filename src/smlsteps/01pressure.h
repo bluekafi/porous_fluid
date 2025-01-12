@@ -14,8 +14,8 @@ namespace func
 	{
 		static tdouble_type generate_equations_aug_matrix(
 				const tdouble_type& radius,
-				const tmns_type& mnsc,
-				const std::vector<std::vector<int>>& add_mnsc,
+				const tmns_type& mns,
+				const std::vector<std::vector<int>>& add_mns,
 				const network::Dimension& dimension,
 				const double total_flow_rate
 			);
@@ -29,8 +29,8 @@ namespace func
 	public:
 		static std::vector<double> calculate_pressure(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
-			const std::vector<std::vector<int>>& add_mnsc,
+			const tmns_type& mns,
+			const std::vector<std::vector<int>>& add_mns,
 			const network::Dimension& dimension,
 			const double total_flow_rate
 		);

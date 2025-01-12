@@ -33,7 +33,7 @@ void PrintSatVSsX(
 	}
 }
 
-double CalculateBlue(const tdouble_type& radius, const tmns_type& mnsc, const network::Dimension& dimension)
+double CalculateBlue(const tdouble_type& radius, const tmns_type& mns, const network::Dimension& dimension)
 {
 	double volume_total = 0;
 	for(int row = 0; row < dimension.rows; ++ row)
@@ -42,7 +42,7 @@ double CalculateBlue(const tdouble_type& radius, const tmns_type& mnsc, const ne
 		{
 			//const double r = radius[row][col];
 			//const double rsq = std::pow(r, 2);
-			const dst::Mns& mns = mnsc[row][col];
+			const dst::Mns& mns = mns[row][col];
 			volume_total += mns.sum_type_first();
 		}
 	}
@@ -52,7 +52,7 @@ double CalculateBlue(const tdouble_type& radius, const tmns_type& mnsc, const ne
 	return declconst::PI * volume_total * declconst::TUBE_LENGTH_CONST;
 }
 
-std::vector<double> SaturationsForEachX(const tdouble_type& radius, const tmns_type& mnsc)
+std::vector<double> SaturationsForEachX(const tdouble_type& radius, const tmns_type& mns)
 {
 	const int y_total = radius.size();
 	const int x_total = radius.front().size();
@@ -65,7 +65,7 @@ std::vector<double> SaturationsForEachX(const tdouble_type& radius, const tmns_t
 		for(int y_i = 0; y_i < y_total; ++ y_i)
 		{
 			//const double r = radius[y_i][x_i];
-			const dst::Mns& mns = mnsc[y_i][x_i];
+			const dst::Mns& mns = mns[y_i][x_i];
 
 			//const double rsq = std::pow(r, 2);
 			type_first += mns.sum_type_first();
@@ -187,10 +187,10 @@ void func::Global::SmartPrint(
 	for(const ConfigAtMomentTime& config: selected_vec)
 	{
 		time.push_back(config.clock);
-		saturations.push_back(SaturationsForEachX(radius, config.mnsc));
+		saturations.push_back(SaturationsForEachX(radius, config.mns));
 		pressures.push_back(config.pressure_input);
 		//std::cout << "work here" << std::endl;
-		func::Global::makeplot(radius, config.mnsc, plot_count++, config.clock);
+		func::Global::makeplot(radius, config.mns, plot_count++, config.clock);
 	}
 
 	PrintSatVSsX(time, saturations);
@@ -223,7 +223,7 @@ void ShowProgress(const double progress, int& last_count)
 }
 
 
-void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const network::Dimension& dimension)
+void func::Global::simulate(const tdouble_type& radius, tmns_type& mns, const network::Dimension& dimension)
 {
 
 	int count = 10000;
@@ -233,12 +233,12 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 
 	//std::vector<std::vector<double>> fluid_ppr_vec;
 
-	//func::Global::makeplot(radius, mnsc, count, clock);
+	//func::Global::makeplot(radius, mns, count, clock);
 	//cmdio::Print::pmat("radius", radius);
 
 	/*
 	double wetting_fluid_proportion;
-	while(within_limits_fluid_first_type(radius, mnsc, wetting_fluid_proportion))
+	while(within_limits_fluid_first_type(radius, mns, wetting_fluid_proportion))
 	*/
 
 	const double total_volume_of_system = CalculateTotalVolumeOfSystem(
@@ -258,7 +258,7 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 		const func::Measure::FluidPpr fluid_ppr
 			= func::Measure::fluid_ppr(
 				radius,
-				mnsc,
+				mns,
 				clock,
 				declconst::ROW_THIN_B,
 				declconst::COL_THIN_B,
@@ -281,19 +281,19 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 		// step-0 Generate add_msn table
 
 		const std::vector<std::vector<int>> add_msn
-			= func::Determine::gen_add_mnsc(mnsc, dimension);
+			= func::Determine::gen_add_mns(mns, dimension);
 
 		// step-1 PRESSURE
 		const std::vector<double> pressure
 			= func::Pressure::calculate_pressure(
-				radius, mnsc, add_msn, dimension, total_flow_rate);
+				radius, mns, add_msn, dimension, total_flow_rate);
 
 		//cmdio::Print::pmat("pressure", pressure, radius.size(), radius.front().size());
 
 		// step-2 VELOCITY
 		const tdouble_type velocity
 			= func::Velocity::calculate_velocity(
-				radius, mnsc, add_msn, pressure, dimension);
+				radius, mns, add_msn, pressure, dimension);
 
 		//cmdio::Print::pmat("velocity", velocity);
 
@@ -312,14 +312,14 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 		// step-5 INTEGRATION
 
 		// old one used to model imbibition
-		//mnsc = func::Integration::integrate(radius,
-		//	mnsc, velocity, volume, dimension, time_step);
+		//mns = func::Integration::integrate(radius,
+		//	mns, velocity, volume, dimension, time_step);
 
 		const auto integration_result = func::Integration::integrate(
-			radius,	mnsc, velocity, volume, dimension, time_step);
+			radius,	mns, velocity, volume, dimension, time_step);
 
 
-		mnsc = integration_result.new_mnsc;
+		mns = integration_result.new_mns;
 		clock += time_step;
 		const auto fluid_injected = integration_result.fluid_injected;
 		const auto fluid_expelled = integration_result.fluid_expelled;
@@ -357,13 +357,13 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 		total_volume_injected += volume_injected_at_this_step;
 		ConfigAtMomentTime config_at_moment_time;
 		config_at_moment_time.clock = clock;
-		config_at_moment_time.mnsc = mnsc;
+		config_at_moment_time.mns = mns;
 		config_at_moment_time.pressure_input = pressure.back();
 
 
 		config_at_moment_time.volume_injected = total_volume_injected;
 		config_at_moment_time.flow_rate_at_this_step = volume_injected_at_this_step / time_step;
-		config_at_moment_time.volume_blue_in_system = CalculateBlue(radius, mnsc, dimension);
+		config_at_moment_time.volume_blue_in_system = CalculateBlue(radius, mns, dimension);
 
 		//std::cout << "clock=" << config_at_moment_time.clock << std::endl;
 		//std::cout << "input_pressure=" << config_at_moment_time.pressure_input << std::endl;
@@ -379,8 +379,8 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 		}
 
 
-		//cmdio::Print::pmnsc(mnsc);
-		func::Global::makeplot(radius, mnsc, plot_count++, clock);
+		//cmdio::Print::pmns(mns);
+		func::Global::makeplot(radius, mns, plot_count++, clock);
 		//fluid_ppr_vec.push_back(fluid_ppr.val_vec());
 		//fileio::Write::fluid_ppr(func::Measure::FluidPpr::header(), fluid_ppr_vec);
 	}
@@ -393,15 +393,15 @@ void func::Global::simulate(const tdouble_type& radius, tmns_type& mnsc, const n
 	//fileio::Write::fluid_ppr(func::Measure::FluidPpr::header(), fluid_ppr_vec);
 }
 
-void func::Global::makeplot(const tdouble_type& radius, const tmns_type& mnsc, const int count, const double clock)
+void func::Global::makeplot(const tdouble_type& radius, const tmns_type& mns, const int count, const double clock)
 {
-	fileio::Plot::with_radius(mnsc, radius, clock, count);
-	fileio::Plot::without_radius(mnsc, count);
+	fileio::Plot::with_radius(mns, radius, clock, count);
+	fileio::Plot::without_radius(mns, count);
 }
 
-bool func::Global::within_limits_fluid_first_type(const tdouble_type& radius, const tmns_type& mnsc, double& proportion)
+bool func::Global::within_limits_fluid_first_type(const tdouble_type& radius, const tmns_type& mns, double& proportion)
 {
-	proportion = func::Measure::measure_wetting_fluid_proportion(radius, mnsc);
+	proportion = func::Measure::measure_wetting_fluid_proportion(radius, mns);
 	return proportion <= declconst::MAX_WETTING_PROPORTION;
 }
 

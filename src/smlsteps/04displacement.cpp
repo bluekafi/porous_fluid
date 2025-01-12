@@ -18,7 +18,7 @@
 
 func::Integration::IntegrationResult func::Integration::integrate(
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
+	const tmns_type& mns,
 	const tdouble_type& velocity,
 	const tdouble_type& volume,
 	const network::Dimension& dimension,
@@ -27,7 +27,7 @@ func::Integration::IntegrationResult func::Integration::integrate(
 {
 	auto fluid_table_result = calculate_fluid_table(
 		radius,
-		mnsc,
+		mns,
 		velocity,
 		volume,
 		dimension,
@@ -37,14 +37,14 @@ func::Integration::IntegrationResult func::Integration::integrate(
 
 	const auto new_meniscus_configuration = combine_fluid_additions(
 		radius,
-		mnsc,
+		mns,
 		velocity,
 		dimension,
 		fluid_table_result.fluid_table
 	);
 
 	IntegrationResult result;
-	result.new_mnsc = new_meniscus_configuration;
+	result.new_mns = new_meniscus_configuration;
 	result.fluid_injected = fluid_table_result.injection;
 	result.fluid_expelled = fluid_table_result.expulsion;
 
@@ -54,7 +54,7 @@ func::Integration::IntegrationResult func::Integration::integrate(
 func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_table
 (
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
+	const tmns_type& mns,
 	const tdouble_type& velocity,
 	const tdouble_type& volume,
 	const network::Dimension& dimension,
@@ -85,7 +85,7 @@ func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_
 				if(connection.active)
 				{
 					const double rad = radius[connection.row][connection.col];
-					const dst::Mns& mns = mnsc[connection.row][connection.col];
+					const dst::Mns& mns = mns[connection.row][connection.col];
 					const double vel = velocity[connection.row][connection.col];
 					const double vol = volume[connection.row][connection.col];
 
@@ -211,7 +211,7 @@ func::Integration::CalculateFluidTableResult func::Integration::calculate_fluid_
 tmns_type func::Integration::combine_fluid_additions
 (
 	const tdouble_type& radius,
-	tmns_type mnsc,
+	tmns_type mns,
 	const tdouble_type& velocity,
 	const network::Dimension& dimension,
 	const TFluid& fluid_addition_table
@@ -229,11 +229,11 @@ tmns_type func::Integration::combine_fluid_additions
 				fluid_addition_table[row][col].grey
 			};
 
-			mnsc[row][col].update(vel, rad, add_fluid_from_tank_to_tube);
+			mns[row][col].update(vel, rad, add_fluid_from_tank_to_tube);
 		}
 	}
 
-	return mnsc;
+	return mns;
 }
 
 bool func::Integration::compare_where_wetting_fluid_go_first(const Tube_FromNode& first, const Tube_FromNode& second)

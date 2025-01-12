@@ -487,7 +487,7 @@ int dst::Mns::type_near_node(const int direction) const
 	return type;
 }
 
-// Part-6 Printing and Reading mnsc overloads ---------------------------------
+// Part-6 Printing and Reading mns overloads ---------------------------------
 
 double dst::Mns::printable() const
 {

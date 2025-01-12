@@ -12,8 +12,8 @@ namespace func
 	public:
 		static tdouble_type calculate_velocity(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
-			const std::vector<std::vector<int>>& add_mnsc,
+			const tmns_type& mns,
+			const std::vector<std::vector<int>>& add_mns,
 			const std::vector<double>& pressure,
 			const network::Dimension& dimension
 		);

@@ -1,10 +1,10 @@
-#ifndef IO_FROM_FILE_H
-#define IO_FROM_FILE_H
+#ifndef INCONGEN_FROM_FILE_H
+#define INCONGEN_FROM_FILE_H
 
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "incongen/tradius.h"
-#include "incongen/tmns_type.h"
+#include "incongen/tmns.h"
 #include "incongen/tlength.h"
 
 namespace incongen

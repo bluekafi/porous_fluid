@@ -49,7 +49,7 @@ namespace func
 
 		static CalculateFluidTableResult calculate_fluid_table(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
+			const tmns_type& mns,
 			const tdouble_type& velocity,
 			const tdouble_type& volume,
 			const network::Dimension& dimension,
@@ -63,7 +63,7 @@ namespace func
 
 		static tmns_type combine_fluid_additions(
 			const tdouble_type& radius,
-			tmns_type mnsc,
+			tmns_type mns,
 			const tdouble_type& velocity,
 			const network::Dimension& dimension,
 			const TFluid& fluid_addition_table
@@ -73,14 +73,14 @@ namespace func
 	public:
 		struct IntegrationResult
 		{
-			tmns_type new_mnsc;
+			tmns_type new_mns;
 			std::vector<double> fluid_injected;
 			std::vector<double> fluid_expelled;
 		};
 
 		static IntegrationResult integrate(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
+			const tmns_type& mns,
 			const tdouble_type& velocity,
 			const tdouble_type& volume,
 			const network::Dimension& dimension,

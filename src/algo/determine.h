@@ -14,8 +14,8 @@ namespace func
 
 		static tdouble_type determine_volume(const tdouble_type& radius, const tdouble_type& velocity, const double time_step, const network::Dimension& dimension);
 
-		static std::vector<std::vector<int>> gen_add_mnsc(
-			const tmns_type& mnsc,
+		static std::vector<std::vector<int>> gen_add_mns(
+			const tmns_type& mns,
 			const network::Dimension& dimension
 		);
 	};

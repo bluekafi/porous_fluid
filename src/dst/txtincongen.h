@@ -1,6 +1,11 @@
 #ifndef DST_TXTINCONGEN_H
 #define DST_TXTINCONGEN_H
 
+#include "algo/utility.h"
+#include <set>
+#include <string>
+#include <vector>
+
 namespace dst
 {
 	namespace decls_incongen_nps
@@ -13,22 +18,22 @@ namespace dst
 				const std::string ncols = "ncols";
 				const std::string tradius = "tradius";
 				const std::string tlength = "tlength";
-				const std::string tmns_type = "tmns_type";
+				const std::string tmns = "tmns";
 			}
 
 			namespace vals_nps
 			{
-				std::string constant = "const";
+				std::string constant_keyword = "const";
 				namespace radius_nps
 				{
 					const std::string imbibition = "imbibiton";
-					const std::string constant = constant;
+					const std::string constant = constant_keyword;
 					const std::string function = "function";
 				}
 
 				namespace length_nps
 				{
-					const std::string constant = constant;
+					const std::string constant = constant_keyword;
 					const std::string inverseradius = "inverseradius";
 				}
 
@@ -47,19 +52,14 @@ namespace dst
 			std::vector<std::string> values;
 		};
 
-		const std::vector<CategoryAndValues>
-		category_and_values_vec
+		const std::vector<CategoryAndValues> category_and_values_vec
 		{
-			{
-				cats_nps::nrows, {"40"}
-			},
+			{possible_nps::cats_nps::nrows, {"40"}},
+
+			{possible_nps::cats_nps::ncols, {"40"}},
 
 			{
-				cats_nps::ncols, {"40"}
-			},
-
-			{
-				cats_nps::tradius,
+				possible_nps::cats_nps::tradius,
 				{
 					possible_nps::vals_nps::radius_nps::constant + "=1.13",
 					possible_nps::vals_nps::radius_nps::imbibition,
@@ -67,14 +67,14 @@ namespace dst
 				}
 			},
 			{
-				cats_nps::tlength,
+				possible_nps::cats_nps::tlength,
 				{
 					possible_nps::vals_nps::length_nps::constant + "2.12",
 					possible_nps::vals_nps::length_nps::inverseradius
 				}
 			},
 			{
-				cats_nps::tmns_type,
+				possible_nps::cats_nps::tmns,
 				{
 					possible_nps::vals_nps::mns_nps::imbibition,
 					possible_nps::vals_nps::mns_nps::saturate_water,
@@ -86,17 +86,19 @@ namespace dst
 
 	class TxtIncongen
 	{
+		static bool is_const(const std::string& s);
+		static std::pair<std::string, double> match_with_val(const std::string& s, const std::vector<std::string>& v);
+		static std::vector<std::string> find_vals_of_corresponding_cat(const std::string& s);
+		
 	public:
 		int nrows;
 		int ncols;
 		std::pair<std::string, double> tradius;
 		std::pair<std::string, double> tlength;
-		std::string tmns_type;
-		bool set();
-		static std::set<std::string> categories_set(const std::string& buffer_line);
-		static bool is_const(const std::string& s);
-		static std::pair<std::string, double> match_with_val(const std::string& s, const std::vector<std::string>& v);
-		static std::vector<std::string> find_vals_of_corresponding_cats(const std::string& s);
+		std::string tmns;
+		bool set(const std::string& buffer_lin);
+		static std::set<std::string> set_of_categories();
+
 	};
 
 }

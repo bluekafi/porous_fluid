@@ -3,7 +3,7 @@ class Generate
 {
 public:
 	static void radius(const network::Dimension& dimension);
-	static void mnsc(const network::Dimension& dimension);
+	static void mns(const network::Dimension& dimension);
 };
 
 class Modify
@@ -28,7 +28,7 @@ class Modify
 	static tdouble_type add_random_temporary(tdouble_type radius);
 public:
 	static void radius();
-	static void mnsc();
+	static void mns();
 	static void add_random_to_radius();
 };
 

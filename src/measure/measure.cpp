@@ -1,6 +1,6 @@
 #include "funcmeasure.h"
 
-double func::Measure::measure_wetting_fluid_proportion(const tdouble_type& radius, const tmns_type& mnsc)
+double func::Measure::measure_wetting_fluid_proportion(const tdouble_type& radius, const tmns_type& mns)
 {
 	const int n = radius.size();
 	const int m = radius.front().size();
@@ -11,7 +11,7 @@ double func::Measure::measure_wetting_fluid_proportion(const tdouble_type& radiu
 		for(int j = 0; j < m; ++ j)
 		{
 			const double rsq = std::pow(radius[i][j], 2);
-			type_first += mnsc[i][j].sum_type_first() * rsq;
+			type_first += mns[i][j].sum_type_first() * rsq;
 			total += rsq;
 		}
 	}
@@ -21,7 +21,7 @@ double func::Measure::measure_wetting_fluid_proportion(const tdouble_type& radiu
 
 func::Measure::FluidPpr func::Measure::fluid_ppr(
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
+	const tmns_type& mns,
 	const double time,
 	const int row_b,
 	const int col_b,
@@ -42,7 +42,7 @@ func::Measure::FluidPpr func::Measure::fluid_ppr(
 		for(int col = 0; col < dm.cols; ++ col)
 		{
 			const double rad = radius[row][col];
-			const double blue_ppr = mnsc[row][col].sum_type_first();
+			const double blue_ppr = mns[row][col].sum_type_first();
 
 			const bool inside
 				= is_inside(rmin, row, rmax)
@@ -50,7 +50,7 @@ func::Measure::FluidPpr func::Measure::fluid_ppr(
 
 			fluidp.add_blue(rad, blue_ppr, inside);
 
-			if(mnsc[row][col].n % 2 == 0)
+			if(mns[row][col].n % 2 == 0)
 			{
 				continue;
 			}

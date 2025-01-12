@@ -10,7 +10,7 @@ int main()
 	fileio::Data data = fileio::Read::loop_until_proper_files();
 	func::Global::simulate(
 		data.radius,
-		data.mnsc,
+		data.mns,
 		data.dimension
 	);
 	return 0;

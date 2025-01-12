@@ -2,8 +2,8 @@
 
 tdouble_type func::Pressure::generate_equations_aug_matrix(
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
-	const std::vector<std::vector<int>>& add_mnsc,
+	const tmns_type& mns,
+	const std::vector<std::vector<int>>& add_mns,
 	const network::Dimension& dimension,
 	const double total_flow_rate
 )
@@ -39,13 +39,13 @@ tdouble_type func::Pressure::generate_equations_aug_matrix(
 				if(connection.active)
 				{
 					const double r = radius[connection.row][connection.col];
-					const dst::Mns& mns = mnsc[connection.row][connection.col];
+					const dst::Mns& mns = mns[connection.row][connection.col];
 					const double tube_length = declconst::TUBE_LENGTH_CONST / (r * r);
 
 					const int sign_of_capll_pressure
 						= calc_sign_capll_pressure(
 							mns.sign_of_capll_pressure(direction),
-							add_mnsc[connection.row][connection.col],
+							add_mns[connection.row][connection.col],
 							direction
 						);
 
@@ -79,7 +79,7 @@ tdouble_type func::Pressure::generate_equations_aug_matrix(
 			if(connection.active)
 			{
 				const double r = radius[connection.row][connection.col];
-				const dst::Mns& mns = mnsc[connection.row][connection.col];
+				const dst::Mns& mns = mns[connection.row][connection.col];
 				const double tube_length = declconst::TUBE_LENGTH_CONST / (r * r);
 
 				const double A = declconst::PI * std::pow(r, 4)
@@ -92,7 +92,7 @@ tdouble_type func::Pressure::generate_equations_aug_matrix(
 				const int sign_of_capll_pressure
 						= calc_sign_capll_pressure(
 							mns.sign_of_capll_pressure(direction),
-							add_mnsc[connection.row][connection.col],
+							add_mns[connection.row][connection.col],
 							direction
 						);
 
@@ -130,8 +130,8 @@ tdouble_type func::Pressure::generate_equations_aug_matrix(
 
 std::vector<double> func::Pressure::calculate_pressure(
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
-	const std::vector<std::vector<int>>& add_mnsc,
+	const tmns_type& mns,
+	const std::vector<std::vector<int>>& add_mns,
 	const network::Dimension& dimension,
 	const double total_flow_rate
 )
@@ -139,8 +139,8 @@ std::vector<double> func::Pressure::calculate_pressure(
 	const tdouble_type equations
 		= func::Pressure::generate_equations_aug_matrix(
 				radius,
-				mnsc,
-				add_mnsc,
+				mns,
+				add_mns,
 				dimension,
 				total_flow_rate
 			);

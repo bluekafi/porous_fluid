@@ -56,7 +56,7 @@ void initcon::Mode::Generate::radius(const network::Dimension& dimension)
 	fileio::Write::run(r);
 }
 
-void initcon::Mode::Generate::mnsc(const network::Dimension& dimension)
+void initcon::Mode::Generate::mns(const network::Dimension& dimension)
 {
 	const tmns_type m(dimension.rows,
 		std::vector<dst::Mns>(dimension.cols));
@@ -84,12 +84,12 @@ void initcon::Mode::Main::generate()
 	}
 	else if(cmd_file_regen == 'm')
 	{
-		Generate::mnsc(dimension);
+		Generate::mns(dimension);
 	}
 	else if(cmd_file_regen == 'b')
 	{
 		Generate::radius(dimension);
-		Generate::mnsc(dimension);
+		Generate::mns(dimension);
 	}
 	std::cout << "-EXT-exited generate" << std::endl;
 }
@@ -106,7 +106,7 @@ void initcon::Mode::Main::modify()
 	}
 	else if(cmd_file_modify == 'm')
 	{
-		Modify::mnsc();
+		Modify::mns();
 	}
 	else if(cmd_file_modify == 'a')
 	{
@@ -163,10 +163,10 @@ void initcon::Mode::Modify::add_random_to_radius()
 	} while(!cmdio::Read::command_char_exit_true("r)egenerate, s)ave", command_char));
 }
 
-void initcon::Mode::Modify::mnsc()
+void initcon::Mode::Modify::mns()
 {
-	const std::string file_name = declfilename::FILE_MNSC;
-	const std::pair<tmns_type, bool> data = fileio::Read::read_mnsc();
+	const std::string file_name = declfilename::FILE_mns;
+	const std::pair<tmns_type, bool> data = fileio::Read::read_mns();
 
 	if(data.second == false)
 	{
@@ -282,14 +282,14 @@ void initcon::Mode::Main::imhibition_generator()
 	fileio::Write::run(radius);
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mns(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
 	{
 		for(int col = leave; col + leave < size; ++ col)
 		{
-			mnsc[row][col] = mns_grey;
+			mns[row][col] = mns_grey;
 		}
 	}
 
@@ -299,8 +299,8 @@ void initcon::Mode::Main::imhibition_generator()
 
 	for(int col = leave - 1; col + leave - 1 < size; ++ col)
 	{
-		mnsc[leave - 1][col] = mns_down_facing;
-		mnsc[size - leave][col] = mns_up_facing;
+		mns[leave - 1][col] = mns_down_facing;
+		mns[size - leave][col] = mns_up_facing;
 	}
 
 	std::vector<dst::Mns> v{mns_up_facing, mns_down_facing};
@@ -308,11 +308,11 @@ void initcon::Mode::Main::imhibition_generator()
 	{
 		const dst::Mns& copy_ref_mns =v[row % 2];
 
-		mnsc[row][leave - 1] = copy_ref_mns;
-		mnsc[row][size - leave] = copy_ref_mns;
+		mns[row][leave - 1] = copy_ref_mns;
+		mns[row][size - leave] = copy_ref_mns;
 	}
 
-	fileio::Write::run(mnsc);
+	fileio::Write::run(mns);
 }
 */
 
@@ -337,14 +337,14 @@ void initcon::Mode::Main::imhibition_generator()
 	fileio::Write::run(radius);
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mns(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
 	{
 		for(int col = leave; col + leave < size; ++ col)
 		{
-			mnsc[row][col] = mns_grey;
+			mns[row][col] = mns_grey;
 		}
 	}
 
@@ -354,8 +354,8 @@ void initcon::Mode::Main::imhibition_generator()
 
 	for(int col = leave + 1; col + leave + 1 < size; ++ col)
 	{
-		mnsc[leave - 1][col] = mns_down_facing;
-		mnsc[size - leave][col] = mns_up_facing;
+		mns[leave - 1][col] = mns_down_facing;
+		mns[size - leave][col] = mns_up_facing;
 	}
 
 	std::vector<dst::Mns> v{mns_up_facing, mns_down_facing};
@@ -363,16 +363,16 @@ void initcon::Mode::Main::imhibition_generator()
 	{
 		const dst::Mns& copy_ref_mns =v[row % 2];
 
-		mnsc[row][leave - 1] = copy_ref_mns;
-		mnsc[row][size - leave] = copy_ref_mns;
+		mns[row][leave - 1] = copy_ref_mns;
+		mns[row][size - leave] = copy_ref_mns;
 	}
 
-	mnsc[leave][leave] = mns_down_facing;
-	mnsc[leave][size - leave - 1] = mns_down_facing;
-	mnsc[size - 1 - leave][leave] = mns_up_facing;
-	mnsc[size - 1 - leave][size - leave - 1] = mns_up_facing;
+	mns[leave][leave] = mns_down_facing;
+	mns[leave][size - leave - 1] = mns_down_facing;
+	mns[size - 1 - leave][leave] = mns_up_facing;
+	mns[size - 1 - leave][size - leave - 1] = mns_up_facing;
 
-	fileio::Write::run(mnsc);
+	fileio::Write::run(mns);
 }
 */
 
@@ -447,14 +447,14 @@ tmns_type GenerateMnsDistibWithInterfaceInThinnerRegion(
 	const double initial_fill = 0.80; //from the blue side
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
-	tmns_type mnsc(size, std::vector<dst::Mns>(size, mns_blue));
+	tmns_type mns(size, std::vector<dst::Mns>(size, mns_blue));
 
 	const dst::Mns mns_grey(0, 1, -1, -1);
 	for(int row = leave; row + leave < size; ++ row)
 	{
 		for(int col = leave; col + leave < size; ++ col)
 		{
-			mnsc[row][col] = mns_grey;
+			mns[row][col] = mns_grey;
 		}
 	}
 
@@ -464,8 +464,8 @@ tmns_type GenerateMnsDistibWithInterfaceInThinnerRegion(
 
 	for(int col = leave; col + leave < size; ++ col)
 	{
-		mnsc[leave][col] = mns_down_facing;
-		mnsc[size - leave - 1][col] = mns_up_facing;
+		mns[leave][col] = mns_down_facing;
+		mns[size - leave - 1][col] = mns_up_facing;
 	}
 
 	std::vector<dst::Mns> v{mns_down_facing, mns_up_facing};
@@ -473,12 +473,12 @@ tmns_type GenerateMnsDistibWithInterfaceInThinnerRegion(
 	{
 		const dst::Mns& copy_ref_mns = v[(row + leave) % 2];
 
-		mnsc[row][leave] = copy_ref_mns;
-		mnsc[row][size - leave - 1] = copy_ref_mns;
+		mns[row][leave] = copy_ref_mns;
+		mns[row][size - leave - 1] = copy_ref_mns;
 	}
 
 
-	return mnsc;
+	return mns;
 }
 
 void initcon::Mode::Main::imhibition_generator()
@@ -490,8 +490,8 @@ void initcon::Mode::Main::imhibition_generator()
 	//const tdouble_type radius = GenerateBiscuitTypeGridSystemAlterThickThin(size, leave);
 	//fileio::Write::run(radius);
 
-	const tmns_type mnsc = GenerateMnsDistibWithInterfaceInThinnerRegion(size, leave);
-	fileio::Write::run(mnsc);
+	const tmns_type mns = GenerateMnsDistibWithInterfaceInThinnerRegion(size, leave);
+	fileio::Write::run(mns);
 }
 
 
@@ -530,7 +530,7 @@ void initcon::Mode::Main::generate_for_filtration()
 
 	const dst::Mns mns_blue(0, 0, -1, -1);
 	const dst::Mns mns_grey(0, 1, -1, -1);
-	tmns_type mnsc(
+	tmns_type mns(
 			rows,
 			std::vector<dst::Mns>(cols, mns_grey)
 		);
@@ -547,11 +547,11 @@ void initcon::Mode::Main::generate_for_filtration()
 	{
 		const dst::Mns& copy_ref_mns = v[(row + leave) % 2];
 
-		mnsc[row][leave] = copy_ref_mns;
-		mnsc[row][0] = mns_blue;
+		mns[row][leave] = copy_ref_mns;
+		mns[row][0] = mns_blue;
 	}
 
-	fileio::Write::run(mnsc);
+	fileio::Write::run(mns);
 
 	const auto radius = sinosodial_radius_generator(rows, cols);
 	fileio::Write::run(radius);

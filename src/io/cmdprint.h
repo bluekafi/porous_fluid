@@ -18,11 +18,11 @@ namespace cmdio
 	public:
 		// print matrix := pmat
 		static void pmat(const std::string& s, const tdouble_type& matrix);
-		static void pmat(const std::string& s, const tmns_type& mnsc); // compressed to a double
+		static void pmat(const std::string& s, const tmns_type& mns); // compressed to a double
 		static void pmat(const std::string& s,
 			const std::vector<double>& v, const int n, const int m); //linear pressure vector printed as a matrix
 
-		static void pmnsc(const tmns_type& matrix); // matric values are printed in a new line
+		static void pmns(const tmns_type& matrix); // matric values are printed in a new line
 		static void dimension(); // read and print the dimension of each file
 
 		template<class T>

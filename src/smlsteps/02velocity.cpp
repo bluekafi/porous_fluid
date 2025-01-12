@@ -4,8 +4,8 @@
 tdouble_type func::Velocity::calculate_velocity
 (
 	const tdouble_type& radius,
-	const tmns_type& mnsc,
-	const std::vector<std::vector<int>>& add_mnsc,
+	const tmns_type& mns,
+	const std::vector<std::vector<int>>& add_mns,
 	const std::vector<double>& pressure,
 	const network::Dimension& dimension
 )
@@ -21,8 +21,8 @@ tdouble_type func::Velocity::calculate_velocity
 			const double delp = pressure[linear_nodes_pair.second] - pressure[linear_nodes_pair.first];
 			const double rad = radius[row][col];
 			const double tube_length = declconst::TUBE_LENGTH_CONST / (rad * rad);
-			const double mu = mnsc[row][col].mu(declconst::MU1, declconst::MU2);
-			const double sign_of_capll_pressure = mnsc[row][col].sign_of_capll_pressure(0) + add_mnsc[row][col];
+			const double mu = mns[row][col].mu(declconst::MU1, declconst::MU2);
+			const double sign_of_capll_pressure = mns[row][col].sign_of_capll_pressure(0) + add_mns[row][col];
 			velocity[row][col] = rad / 8 / mu / tube_length * (delp * rad + sign_of_capll_pressure * 2 * declconst::SIGMA);
 
 			//std::cout << "tr=" << row << " tc=" << col << " up=" << linear_nodes_pair.second

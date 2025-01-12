@@ -19,7 +19,7 @@
 struct ConfigAtMomentTime
 {
 	double clock;
-	tmns_type mnsc;
+	tmns_type mns;
 	double pressure_input;
 	double volume_injected;
 	double flow_rate_at_this_step;
@@ -33,7 +33,7 @@ namespace func
 		static void makeplot
 		(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
+			const tmns_type& mns,
 			const int count,
 			const double clock
 		);
@@ -41,7 +41,7 @@ namespace func
 		static bool within_limits_fluid_first_type
 		(
 			const tdouble_type& radius,
-			const tmns_type& mnsc,
+			const tmns_type& mns,
 			double& proportion
 		);
 
@@ -51,7 +51,7 @@ namespace func
 		);
 	public:
 		static void simulate(const tdouble_type& radius,
-			tmns_type& mnsc, const network::Dimension& dimension);
+			tmns_type& mns, const network::Dimension& dimension);
 	};
 }
 

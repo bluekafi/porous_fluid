@@ -23,9 +23,9 @@ tdouble_type func::Determine::determine_volume
 	return volume;
 }
 
-std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const tmns_type& mnsc, const network::Dimension& dimension)
+std::vector<std::vector<int>> func::Determine::gen_add_mns(const tmns_type& mns, const network::Dimension& dimension)
 {
-	std::vector<std::vector<int>> add_mnsc = dimension.empty_table_templated<int>();
+	std::vector<std::vector<int>> add_mns = dimension.empty_table_templated<int>();
 
 	for(int nrow = 0; nrow < dimension.node_rows(); ++ nrow)
 	{
@@ -45,7 +45,7 @@ std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const tmns_type& mns
 				const dst::Tube& con = cons[direction];
 				if(con.active)
 				{
-					const int end_type_fluid = mnsc[con.row][con.col].type_near_node(direction);
+					const int end_type_fluid = mns[con.row][con.col].type_near_node(direction);
 					if(end_type_fluid) // grey fluid
 					{
 						need_to_add[direction] = true;
@@ -67,14 +67,14 @@ std::vector<std::vector<int>> func::Determine::gen_add_mnsc(const tmns_type& mns
 				const dst::Tube& con = cons[direction];
 				if(con.active && need_to_add[direction])
 				{
-					add_mnsc[con.row][con.col] += cap_press_contb_from_direc(direction);
+					add_mns[con.row][con.col] += cap_press_contb_from_direc(direction);
 				}
 			}
 
 		}
 	}
 
-	return add_mnsc;
+	return add_mns;
 }
 
 
