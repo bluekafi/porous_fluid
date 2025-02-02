@@ -49,7 +49,7 @@ math::Random::seed();
 void initcon::Mode::Generate::radius(const network::Dimension& dimension)
 {
 	const auto def_radius = cmdio::Read::command_general<double>(
-		"default value of radius");
+		"default val of radius");
 	const tdouble_type r(dimension.rows, std::vector<double>(
 		dimension.cols, def_radius));
 

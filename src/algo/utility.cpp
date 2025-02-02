@@ -1,7 +1,7 @@
 #include "algo/utility.h"
 
 
-std::string algo::Utility::split(const std::string& s)
+std::pair<std::string, std::string> algo::Utility::split(const std::string& s)
 {
 	return
 	{

@@ -13,13 +13,13 @@ namespace drw
 {
 	class hex
 	{
-		unsigned int value;
+		unsigned int val;
 		unsigned int size;
 		static const unsigned int size_of_byte = 8;
 
 	public:
 		hex() = delete;
-		hex(unsigned int value, unsigned int size);
+		hex(unsigned int val, unsigned int size);
 		std::string binary() const;
 	};
 

@@ -6,6 +6,8 @@
 
 namespace network
 {
+	
+	// x, y, lenght, raidus, 
 	struct Tube
 	{
 		bool active = true;

@@ -6,7 +6,7 @@
 
 namespace incongen
 {
-	const std::string PROGRAM_NAME = "incongen INitial_CONditions_GENerator";
+	const std::string PROGRAM_NAME = "incongen: INitial_CONditions_GENerator";
 
 	class Manager
 	{

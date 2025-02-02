@@ -7,7 +7,9 @@ namespace incongen
 	{
 
 	public:
-		static void write_to_file(
+		static void write_to_file(const std::pair<std::string, double>& cat_and_val);
+	};
+}
 
 
 

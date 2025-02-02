@@ -1,6 +1,8 @@
 #ifndef DST_PARAMETER_H
 #define DST_PARAMETER_H
 
+#include <string>
+
 namespace dst
 {
 	namespace decls_parameter_nps
@@ -18,7 +20,8 @@ namespace dst
 		double mu_water;
 		double mu_oil;
 		double total_volumetric_flow_rate;
-
+		
+		//CHANGE_LATER i do not like how it is being set, it hsould be set the same way as in dst/txtinconged
 		bool set(const std::string& name_parameter, const double val);
 	};
 }

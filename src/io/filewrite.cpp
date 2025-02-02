@@ -19,19 +19,19 @@ void fileio::FileWrite::sample_incongen_txt()
 {
 	std::ofstream fout(decl::file::input::INCONGEN);
 
-	for(const dst::TxtIncongenCaregotyAndValues& category_and_values:
-		dst::txt_incongen_category_and_values_vec)
+	for(const dst::catAndvals& cat_and_vals:
+		dst::txt_incongen_cat_and_vals_vec)
 	{
-		const std::string& category
-			= category_and_values.category;
-		const std::vector<std::string>& values
-			= category_and_values.values;
+		const std::string& cat
+			= cat_and_vals.cat;
+		const std::vector<std::string>& vals
+			= cat_and_vals.vals;
 
-		fout << category << "=";
-		for(int i = 0; i < int(values.size()); ++ i)
+		fout << cat << "=";
+		for(int i = 0; i < int(vals.size()); ++ i)
 		{
 			if(i) fout << "/";
-			fout << values[i];
+			fout << vals[i];
 		}
 
 		fout << '\n';

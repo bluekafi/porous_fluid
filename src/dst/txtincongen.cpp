@@ -1,11 +1,11 @@
 #include "dst/txtincongen.h"
 
-std::set<std::string> dst::TxtIncongen::set_of_categories()
+std::set<std::string> dst::TxtIncongen::set_of_cats()
 {
 	std::set<std::string> set;
-	for(const auto& category_and_values: dst::decls_incongen_nps::category_and_values_vec)
+	for(const auto& cat_and_val: dst::decls_incongen_nps::cat_and_vals_vec)
 	{
-		set.insert(category_and_value.category);
+		set.insert(cat_and_val.cat);
 	}
 
 	return set;
@@ -14,26 +14,26 @@ std::set<std::string> dst::TxtIncongen::set_of_categories()
 
 bool dst::TxtIncongen::set(const std::string& buffer_line)
 {
-	const std::string& category = algo::Utility::split(buffer_line).first;
-	const std::string& value = algo::Utility::split(buffer_line).second;
+	const std::string& cat = algo::Utility::split(buffer_line).first;
+	const std::string& val = algo::Utility::split(buffer_line).second;
 
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::nrows)
+	if(cat == dst::decls_incongen_nps::possible_nps::cats_nps::nrows)
 	{
-		this->nrows = std::stoi(value);
+		this->nrows = std::stoi(val);
 		return true;
 	}
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::ncols)
+	if(cat == dst::decls_incongen_nps::possible_nps::cats_nps::ncols)
 	{
-		this->ncols = std::stoi(value);
+		this->ncols = std::stoi(val);
 		return true;
 	}
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tradius)
+	if(cat == dst::decls_incongen_nps::possible_nps::cats_nps::tradius)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cat(category);
+			= find_vals_of_corresponding_cat(cat);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
-			= match_with_val(value, possible_vals);
+			= match_with_val(val, possible_vals);
 
 		if(!buffer_match.second)
 		{
@@ -43,13 +43,13 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 		this->tradius = buffer_match.first;
 		return true;
 	}
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tlength)
+	if(cat == dst::decls_incongen_nps::possible_nps::cats_nps::tlength)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cat(category);
+			= find_vals_of_corresponding_cat(cat);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
-			= match_with_val(value, possible_vals);
+			= match_with_val(val, possible_vals);
 
 		if(!buffer_match.second)
 		{
@@ -59,21 +59,20 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 		this->tlength = buffer_match.first;
 		return true;
 	}
-	if(category == dst::decls_incongen_nps::possible_nps::cats_nps::tmns_type)
+	if(cat == dst::decls_incongen_nps::possible_nps::cats_nps::tmns)
 	{
 		const std::vector<std::string>& possible_vals
-			= find_vals_of_corresponding_cat(category);
+			= find_vals_of_corresponding_cat(cat);
 
 		const std::pair<std::pair<std::string, double>, bool> buffer_match
-			= match_with_val(value, possible_vals);
+			= match_with_val(val, possible_vals);
 
 		if(!buffer_match.second)
 		{
-
 			return false;
 		}
 
-		this->tmns_type = value;
+		this->tmns = val;
 		return true;
 	}
 
@@ -84,27 +83,30 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 bool dst::TxtIncongen::is_const(const std::string& s)
 {
 	const std::string target
-		= dst::decls_incongen_nps::possible_nps::vals_nps::constant;
+		= dst::decls_incongen_nps::possible_nps::vals_nps::constant_keyword;
 	return s.substr(0, target.size()) == target;
 }
 
-std::pair<std::pair<std::string, double>, bool> dst::TxtIncongen::match_with_val(const std::string& s, const std::vector<std::string>& v)
+std::pair<std::pair<std::string, double>, bool>
+	dst::TxtIncongen::match_with_val(
+		const std::string& val, 
+		const std::vector<std::string>& vals_vec)
 {
 	std::pair<std::string, double> buffer;
 
-	if(is_const(value))
+	if(is_const(val))
 	{
-		buffer.second = std::stod(algo::Utility::split(value).second);
+		buffer.second = std::stod(algo::Utility::split(val).second);
 		buffer.first
-			= dst::decls_incongen_nps::possible_nps::vals_nps::constant;
+			= dst::decls_incongen_nps::possible_nps::vals_nps::constant_keyword;
 		return {buffer, true};
 	}
 
-	for(const std::string& val: v)
+	for(const std::string& val_reference: vals_vec)
 	{
-		if(val == s)
+		if(val_reference == val)
 		{
-			buffer.first = s;
+			buffer.first = val;
 			return {buffer, true};
 		}
 	}
@@ -115,15 +117,15 @@ std::pair<std::pair<std::string, double>, bool> dst::TxtIncongen::match_with_val
 
 std::vector<std::string> dst::TxtIncongen::find_vals_of_corresponding_cat(const std::string& s)
 {
-	for(const dst::decls_incongen_nps::CategoryAndValues& cv:
-		dst::decls_incongen_nps::category_and_values_vec)
+	for(const dst::decls_incongen_nps::catAndvals& cv:
+		dst::decls_incongen_nps::cat_and_vals_vec)
 	{
-		if(cv.category == s)
+		if(cv.cat == s)
 		{
-			return {cv.values, true};
+			return cv.vals;
 		}
 	}
 
-	std::cout << "Error in txtincongen.cpp in determining values" << std::endl;
+	std::cout << "Error in txtincongen.cpp in determining vals" << std::endl;
 	return {};
 }

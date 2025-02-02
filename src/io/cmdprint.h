@@ -22,7 +22,7 @@ namespace cmdio
 		static void pmat(const std::string& s,
 			const std::vector<double>& v, const int n, const int m); //linear pressure vector printed as a matrix
 
-		static void pmns(const tmns_type& matrix); // matric values are printed in a new line
+		static void pmns(const tmns_type& matrix); // matric vals are printed in a new line
 		static void dimension(); // read and print the dimension of each file
 
 		template<class T>

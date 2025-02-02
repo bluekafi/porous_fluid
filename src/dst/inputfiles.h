@@ -1,6 +1,10 @@
 #ifndef DST_INPUTFILES_H
 #define DST_INPUTFILES_H
 
+#include "head/decl.h"
+#include "network/dimension.h"
+#include "dst/parameter.h"
+
 namespace dst
 {
 	struct InputFiles

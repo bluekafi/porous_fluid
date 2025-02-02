@@ -24,8 +24,8 @@ std::pair<dst::Parameter, bool> io::FileRead::parameter()
 	while(fin >> buffer_str)
 	{
 		const std::string name = algo::Utility::split(buffer_str).first;
-		const double value = std::stod(algo::Utility::split(buffer_str).second);
-		const bool success = buffer.set(name, value);
+		const double val = std::stod(algo::Utility::split(buffer_str).second);
+		const bool success = buffer.set(name, val);
 		if(!success)
 		{
 			std::cout << "-ERR- parameter.txt is corrupted, failure reading" << buffer_str << std::endl;
@@ -116,7 +116,7 @@ std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
 	}
 
 	std::string buffer_line;
-	std::set<std::string> buffer_set_of_categories;
+	std::set<std::string> buffer_set_of_cats;
 	while(fin >> buffer_line)
 	{
 		const bool set = buffer.set(buffer_line);
@@ -124,12 +124,12 @@ std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
 		{
 			return {buffer, false};
 		}
-		buffer_set_of_categories.insert(algo::Utility::split(buffer_line).first);
+		buffer_set_of_cats.insert(algo::Utility::split(buffer_line).first);
 	}
 
-	if(buffer_set_of_categories != dst::TxtIncongen::set_of_categories())
+	if(buffer_set_of_cats != dst::TxtIncongen::set_of_cats())
 	{
-		std::cout << "--ERR-input/incongen.txt does not have all the categories, forcefully rewriting it" << std::endl;
+		std::cout << "--ERR-input/incongen.txt does not have all the cats, forcefully rewriting it" << std::endl;
 		return {buffer, false};
 	}
 

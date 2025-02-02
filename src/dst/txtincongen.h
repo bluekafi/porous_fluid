@@ -3,8 +3,8 @@
 
 #include "algo/utility.h"
 #include <set>
-#include <string>
 #include <vector>
+#include <iostream>
 
 namespace dst
 {
@@ -46,13 +46,13 @@ namespace dst
 			}
 		}
 
-		struct CategoryAndValues
+		struct catAndvals
 		{
-			std::string category;
-			std::vector<std::string> values;
+			std::string cat;
+			std::vector<std::string> vals;
 		};
 
-		const std::vector<CategoryAndValues> category_and_values_vec
+		const std::vector<catAndvals> cat_and_vals_vec
 		{
 			{possible_nps::cats_nps::nrows, {"40"}},
 
@@ -87,7 +87,10 @@ namespace dst
 	class TxtIncongen
 	{
 		static bool is_const(const std::string& s);
-		static std::pair<std::string, double> match_with_val(const std::string& s, const std::vector<std::string>& v);
+		static std::pair<std::pair<std::string, double>, bool>
+			match_with_val(
+				const std::string& val,
+				const std::vector<std::string>& vals_vec);
 		static std::vector<std::string> find_vals_of_corresponding_cat(const std::string& s);
 		
 	public:
@@ -96,8 +99,8 @@ namespace dst
 		std::pair<std::string, double> tradius;
 		std::pair<std::string, double> tlength;
 		std::string tmns;
-		bool set(const std::string& buffer_lin);
-		static std::set<std::string> set_of_categories();
+		bool set(const std::string& buffer_line);
+		static std::set<std::string> set_of_cats();
 
 	};
 

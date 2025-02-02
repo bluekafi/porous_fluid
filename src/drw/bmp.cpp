@@ -3,8 +3,8 @@
 namespace drw
 {
 	//--Class::hex------------------------------------------------------
-	hex::hex(unsigned int value, unsigned int size):
-		value(value), size(size) {}
+	hex::hex(unsigned int val, unsigned int size):
+		val(val), size(size) {}
 
 	std::string hex::binary() const
 	{
@@ -12,7 +12,7 @@ namespace drw
 
 		for(unsigned int i = 0; i < size; ++ i)
 		{
-			s[i] = (value >> (size_of_byte * i));
+			s[i] = (val >> (size_of_byte * i));
 		}
 
 		return s;

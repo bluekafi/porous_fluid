@@ -6,20 +6,20 @@ bool incongen::FromFile::generate()
 	// if the file is good, generate accordingly
 	// if bad write a default template and return false
 
-	const std::pair<dst::TxtIncongen, bool>& txt_incongen
-		= io::FileRead::read_incongen();
+	const std::pair<dst::TxtIncongen, bool>& txt_incongen_buffer
+		= io::FileRead::txt_incongen();
 
-	if(!txt_incongen.second)
+	if(!txt_incongen_buffer.second)
 	{
 		io::FileWrite::sample_txt_incongen();
 		return false;
 
 	}
 
-	const dst::TxtIncongen& settings = txt_incongen.first;
-	incongen::TRadius::write_to_file(settings.tradius);
-	incongen::TLength::write_to_file(settings.tlength);
-	incongen::TMns::write_to_file(settings.tmns);
+	const dst::TxtIncongen& txt_incongen  = txt_incongen_buffer.first;
+	incongen::TRadius::write_to_file(txt_incongen.tradius);
+	incongen::TLength::write_to_file(txt_incongen.tlength);
+	incongen::TMns::write_to_file(txt_incongen.tmns);
 	// about parameter we think a bit later
 	return true;
 }
