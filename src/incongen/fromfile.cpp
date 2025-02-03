@@ -12,8 +12,7 @@ bool incongen::FromFile::generate()
 	if(!txt_incongen_buffer.second)
 	{
 		io::FileWrite::sample_txt_incongen();
-		return false;
-
+		return false; 
 	}
 
 	const dst::TxtIncongen& txt_incongen  = txt_incongen_buffer.first;

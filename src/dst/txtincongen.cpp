@@ -75,7 +75,8 @@ bool dst::TxtIncongen::set(const std::string& buffer_line)
 		this->tmns = val;
 		return true;
 	}
-
+	
+	std::cout << "Error in dst::TxtIncongen::set(), category match error" << std::endl;
 	return false;
 }
 
@@ -110,7 +111,8 @@ std::pair<std::pair<std::string, double>, bool>
 			return {buffer, true};
 		}
 	}
-
+	
+	std::cout << "Error in match_with_val(), no match found!" << std::endl;
 	return {buffer, false};
 }
 

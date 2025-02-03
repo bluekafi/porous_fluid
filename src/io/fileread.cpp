@@ -122,6 +122,7 @@ std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
 		const bool set = buffer.set(buffer_line);
 		if(!set)
 		{
+			std::cout << "-ERR-in io::FileRead::txt_incongen(), " << buffer_line << " failed to be set" << std::endl;
 			return {buffer, false};
 		}
 		buffer_set_of_cats.insert(algo::Utility::split(buffer_line).first);
@@ -129,7 +130,7 @@ std::pair<dst::TxtIncongen, bool> io::FileRead::txt_incongen()
 
 	if(buffer_set_of_cats != dst::TxtIncongen::set_of_cats())
 	{
-		std::cout << "--ERR-input/incongen.txt does not have all the cats, forcefully rewriting it" << std::endl;
+		std::cout << "-ERR-input/incongen.txt does not have all the cats, forcefully rewriting it" << std::endl;
 		return {buffer, false};
 	}
 

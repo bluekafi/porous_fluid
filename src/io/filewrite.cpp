@@ -12,7 +12,7 @@ void fileio::FileWrite::tlength(const tdouble_type& tlength)
 
 void fileio::FileWrite::tmns_type(const tmns_type& tmns_type)
 {
-	write_base(decl::file::input::mns, tmns_type);
+	write_base(decl::file::input::MNS, tmns_type);
 }
 
 void fileio::FileWrite::sample_incongen_txt()

@@ -19,7 +19,7 @@ namespace decl
 			const std::string FOLDER = "input/";
 			const std::string RADIUS = FOLDER + "tradius.txt";
 			const std::string LENGTH = FOLDER + "tlength.txt";
-			const std::string MNS = FOLDER + "tmns_type.txt";
+			const std::string MNS = FOLDER + "tmns.txt";
 			const std::string PARAMETER = FOLDER + "parameter.txt";
 			const std::string INCONGEN = FOLDER + "incongen.txt";
 		}
@@ -34,7 +34,6 @@ namespace decl
 			const std::string PRESSURE = FOLDER + "pressure/";
 			const std::string THICK = FOLDER + "thick/";
 			const std::string VELOCITY = FOLDER + "velocity/";
-
 		}
 	}
 
